@@ -13,7 +13,7 @@ module game_fsm
     input  logic clk,
     input  logic rst,
 
-    input  logic start_click,   // pulse: nacisniecie przycisku start
+    input  logic start_click,    // pulse: nacisniecie przycisku start
 
     output game_state_t game_state
 );

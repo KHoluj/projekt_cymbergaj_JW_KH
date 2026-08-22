@@ -5,13 +5,14 @@
  * Opis:
  * Modul top gry cymbergaj
  * Aktualnie wersja na jedna plytke (chwiloowy brak mozliwosci inaczej)
+ * Wersja z prostokatami zamiast paletek i kwadrat krazek
  */
 
 module top_airhockey
     import game_pkg::*;
     import vga_pkg::*;
 (
-        input  logic clk,          
+        input  logic clk,          // 65 MHz VGA pixel clock (1024x768@60)
         input  logic clk100MHz,    // 100 MHz, used by the PS/2 mouse core
         input  logic btn_rst,      
 
@@ -68,8 +69,9 @@ module top_airhockey
 
     assign vga_tim_to_bg.rgb = 12'h0_0_0;
 
-    assign vs = vga_out_final.vsync;
-    assign hs = vga_out_final.hsync;
+    
+    assign vs = ~vga_out_final.vsync;
+    assign hs = ~vga_out_final.hsync;
     assign {r, g, b} = vga_out_final.rgb;
 
     /**
@@ -126,7 +128,7 @@ module top_airhockey
     end
 
     /**
-     * Menu: button hit-test + top-level FSM
+     * Menu: button + top-level FSM
      */
 
     logic btn_hover, btn_click;
@@ -154,9 +156,7 @@ module top_airhockey
     );
 
     /**
-     * Placeholder "gameplay": the lab's draggable rectangle, only
-     * active (visible and controllable) while ST_PLAY. To be
-     * replaced by the real paddle + puck logic.
+     * Placeholder, uproszczone elementy gry
      */
 
     logic [11:0] rect_x_ctl, rect_y_ctl;
@@ -172,7 +172,7 @@ module top_airhockey
     );
 
     /**
-     * Text ROMs: title ("AIR HOCKEY") and button label ("START")
+     * Text ROMs: tytul ("AIR HOCKEY") napis przycisku ("START")
      */
 
     logic [10:0] title_font_addr, label_font_addr;
@@ -257,8 +257,6 @@ module top_airhockey
     draw_rect_char #(
         .X_POS(TITLE_X),
         .Y_POS(TITLE_Y)
-        // WIDTH_PX/HEIGHT_PX left at default (256x128): title area is
-        // isolated, no need to shrink it.
     ) u_draw_title (
         .clk   (clk),
         .rst   (rst),

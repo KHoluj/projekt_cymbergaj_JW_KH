@@ -29,7 +29,6 @@ module draw_button #(
 
     /**
      * 2-cycle pipeline
-     */
 
     logic [10:0] hcount_d1, vcount_d1, hcount_d2, vcount_d2;
     logic hsync_d1, vsync_d1, hblnk_d1, vblnk_d1;

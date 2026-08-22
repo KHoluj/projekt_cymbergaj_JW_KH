@@ -100,8 +100,11 @@ module top_vga (
      * Signals assignments
      */
 
-    assign vs = vga_out_final.vsync;
-    assign hs = vga_out_final.hsync;
+    // 1024x768@60 uses NEGATIVE sync polarity (pulse is active-low on the
+    // pin), while every vga_if signal in the pipeline stays "1 = pulse
+    // active" throughout -- so invert only here, at the final pin drive.
+    assign vs = ~vga_out_final.vsync;
+    assign hs = ~vga_out_final.hsync;
     assign {r, g, b} = vga_out_final.rgb;
 
     assign vga_tim_to_bg.rgb = 12'h0_0_0;

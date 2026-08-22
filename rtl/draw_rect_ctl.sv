@@ -17,13 +17,13 @@ module draw_rect_ctl (
 );
 
     // -------------------------
-    // Screen param
+    // Parametr ekranu
     // -------------------------
     localparam int SCREEN_H = 600;
     localparam int RECT_H   = 64;
 
     // -------------------------
-    // States
+    // Stany FSM
     // -------------------------
     typedef enum logic [1:0] {
         FOLLOW,
@@ -34,7 +34,7 @@ module draw_rect_ctl (
     state_t state;
 
     // -------------------------
-    // Mouse click detection
+    // Detekcja przycisku myszy
     // -------------------------
     logic mouse_left_d;
     logic mouse_left_click;
@@ -49,7 +49,7 @@ module draw_rect_ctl (
     assign mouse_left_click = mouse_left & ~mouse_left_d;
 
     // -------------------------
-    // Generating ticks 
+    // Generowanie tickow
     // -------------------------
     logic [19:0] tick_cnt;
     logic tick;
