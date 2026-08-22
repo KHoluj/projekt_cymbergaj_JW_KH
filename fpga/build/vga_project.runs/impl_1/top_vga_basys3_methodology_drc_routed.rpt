@@ -1,0 +1,222 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Mon Aug 17 09:23:13 2026
+| Host         : DESKTOP-F52E2VT running 64-bit major release  (build 9200)
+| Command      : report_methodology -file top_vga_basys3_methodology_drc_routed.rpt -pb top_vga_basys3_methodology_drc_routed.pb -rpx top_vga_basys3_methodology_drc_routed.rpx
+| Design       : top_vga_basys3
+| Device       : xc7a35tcpg236-1
+| Speed File   : -1
+| Design State : Fully Routed
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max checks: <unlimited>
+             Checks found: 37
++-----------+----------+--------------------------------------------+--------+
+| Rule      | Severity | Description                                | Checks |
++-----------+----------+--------------------------------------------+--------+
+| DPIR-1    | Warning  | Asynchronous driver check                  | 30     |
+| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 2      |
+| TIMING-18 | Warning  | Missing input or output delay              | 5      |
++-----------+----------+--------------------------------------------+--------+
+
+2. REPORT DETAILS
+-----------------
+DPIR-1#1 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[0] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#2 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[10] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#3 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[11] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#4 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[12] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#5 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[13] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#6 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[14] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#7 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[15] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#8 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[16] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#9 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[17] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#10 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[18] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#11 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[19] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#12 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[1] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#13 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[20] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#14 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[21] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#15 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[22] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#16 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[23] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#17 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[24] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#18 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[25] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#19 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[26] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#20 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[27] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#21 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[28] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#22 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[29] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#23 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[2] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#24 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[3] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#25 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[4] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#26 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[5] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#27 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[6] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#28 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[7] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#29 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[8] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#30 Warning
+Asynchronous driver check  
+DSP u_top_vga/u_rect_ctl/state4 input pin u_top_vga/u_rect_ctl/state4/A[9] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+SYNTH-6#1 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance u_top_vga/u_font_rom/char_line_pixels_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#2 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance u_top_vga/u_rom/char_code_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+TIMING-18#1 Warning
+Missing input or output delay  
+An input delay is missing on PS2Clk relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#2 Warning
+Missing input or output delay  
+An input delay is missing on PS2Data relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#3 Warning
+Missing input or output delay  
+An input delay is missing on btnC relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#4 Warning
+Missing input or output delay  
+An output delay is missing on PS2Clk relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#5 Warning
+Missing input or output delay  
+An output delay is missing on PS2Data relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+

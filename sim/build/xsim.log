@@ -1,0 +1,37 @@
+#-----------------------------------------------------------
+# xsim v2021.2 (64-bit)
+# SW Build 3367213 on Tue Oct 19 02:47:39 MDT 2021
+# IP Build 3369179 on Thu Oct 21 08:25:16 MDT 2021
+# Start of session at: Thu May 28 12:57:03 2026
+# Process ID: 10652
+# Current directory: /home/student/jwojciechowska/uec2/lab5/sim/build
+# Command line: xsim -source {xsim.dir/top_vga_tb/xsim_script.tcl}
+# Log file: /home/student/jwojciechowska/uec2/lab5/sim/build/xsim.log
+# Journal file: /home/student/jwojciechowska/uec2/lab5/sim/build/xsim.jou
+# Running On: cadence30, OS: Linux, CPU Frequency: 3732.226 MHz, CPU Physical cores: 4, Host memory: 16720 MB
+#-----------------------------------------------------------
+start_gui
+xterm: Xt error: Can't open display: :59.0
+ERROR: [Common 17-1374] Display test failed. Please check DISPLAY environment variable and X server permissions for remote display.
+source xsim.dir/top_vga_tb/xsim_script.tcl
+# set_param project.enableReportConfiguration 0
+# load_feature core
+# current_fileset
+# xsim {top_vga_tb} -autoloadwcfg -tclbatch {/home/student/jwojciechowska/uec2/lab5/tools/sim_cmd.tcl}
+Time resolution is 1 ps
+source /home/student/jwojciechowska/uec2/lab5/tools/sim_cmd.tcl
+## log_wave *      # top module signals only
+## run all
+If simulation ends before the testbench
+completes, use the menu option to run all.
+Prepare to wait a long time...
+Info: tiff_writer started frame           0
+Info: negedge VS at               132000
+Info: tiff writer finished frame           0
+Info: tiff_writer started frame           1
+Info: negedge VS at          15333324000
+Simulation is over, check the waveforms.
+$finish called at time : 15333324 ns : File "/home/student/jwojciechowska/uec2/lab5/sim/top_vga/top_vga_tb.sv" Line 102
+run: Time (s): cpu = 00:00:00.42 ; elapsed = 00:00:09 . Memory (MB): peak = 2860.289 ; gain = 0.000 ; free physical = 7701 ; free virtual = 16866
+## add_wave /      # top module signals only
+xsim: Time (s): cpu = 00:00:00.43 ; elapsed = 00:00:10 . Memory (MB): peak = 2860.289 ; gain = 0.000 ; free physical = 7701 ; free virtual = 16866
