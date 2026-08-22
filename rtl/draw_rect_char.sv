@@ -1,9 +1,20 @@
+/**
+ * 
+ * Autor: KH
+ * 
+ * Opis:
+ * Rysowanie przycisku napis
+ */
+
 module draw_rect_char #(
     parameter int X_POS = 64,
-    parameter int Y_POS = 64
+    parameter int Y_POS = 64,
+    parameter int WIDTH_PX  = 256,
+    parameter int HEIGHT_PX = 128
 )(
     input  logic clk,
     input  logic rst,
+    input  logic active,   // rysowanie gdy aktywny 'active'
 
     vga_if.in  vga_in,
     vga_if.out vga_out,
@@ -19,11 +30,13 @@ module draw_rect_char #(
     assign local_x = vga_in.hcount - X_POS;
     assign local_y = vga_in.vcount - Y_POS;
 
+    // Adres w gridzie 32x8.
+    // Niezaleznie od WIDTH_PX/HEIGHT_PX 
     assign char_xy   = {local_y[6:4], local_x[7:3]};
     assign char_line = local_y[3:0];
 
     logic in_rect;
-    assign in_rect = (vga_in.hcount >= X_POS) && (vga_in.hcount < X_POS + 256) && (vga_in.vcount >= Y_POS) && (vga_in.vcount < Y_POS + 128);
+    assign in_rect = active && (vga_in.hcount >= X_POS) && (vga_in.hcount < X_POS + WIDTH_PX) && (vga_in.vcount >= Y_POS) && (vga_in.vcount < Y_POS + HEIGHT_PX);
 
     logic [10:0] hcount_d1, vcount_d1, hcount_d2, vcount_d2;
     logic hsync_d1, vsync_d1, hblnk_d1, vblnk_d1;

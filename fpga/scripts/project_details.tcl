@@ -13,10 +13,10 @@
 #                   Project details                   #
 #-----------------------------------------------------#
 # Project name                                  -- EDIT
-set project_name vga_project
+set project_name airhockey_project
 
 # Top module name                               -- EDIT
-set top_module top_vga_basys3
+set top_module top_airhockey_basys3
 
 # FPGA device
 set target xc7a35tcpg236-1
@@ -28,23 +28,31 @@ set target xc7a35tcpg236-1
 set xdc_files {
     constraints/top_vga_basys3.xdc
     constraints/clk_wiz_0.xdc
+    constraints/top_airhockey_basys3.xdc
 }
 
 # Specify SystemVerilog design files location   -- EDIT
 set sv_files {
     ../rtl/char_rom.sv
     ../rtl/draw_bg.sv
+    ../rtl/draw_button.sv
     ../rtl/draw_mouse.sv
     ../rtl/draw_rect_char.sv
     ../rtl/draw_rect_ctl.sv
     ../rtl/draw_rect.sv
     ../rtl/font_rom.sv
+    ../rtl/game_fsm.sv
+    ../rtl/game_pkg.sv
     ../rtl/image_rom.sv
+    ../rtl/menu_ctl.sv
+    ../rtl/rst_ctl.sv
+    ../rtl/top_airhockey.sv
     ../rtl/top_vga.sv
     ../rtl/vga_if.sv
     ../rtl/vga_pkg.sv
     ../rtl/vga_timing.sv
     rtl/top_vga_basys3.sv
+    rtl/top_airhockey_basys3.sv
 }
 
 # Specify Verilog design files location         -- EDIT

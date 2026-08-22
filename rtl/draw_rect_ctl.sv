@@ -1,3 +1,9 @@
+/**
+ * 
+ * Autor: KH
+ *
+ */
+
 module draw_rect_ctl (
     input  logic clk,
     input  logic rst_n,

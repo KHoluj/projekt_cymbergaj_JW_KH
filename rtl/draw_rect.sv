@@ -1,6 +1,14 @@
+/**
+ * 
+ * Autor: KH
+ *
+ * 
+ */
+
 module draw_rect (
     input  logic clk,
     input  logic rst_n,
+    input  logic active,   
     input  logic [11:0] rect_x,
     input logic  [11:0] rect_y,
     vga_if.in  vga_in, 
@@ -61,7 +69,8 @@ module draw_rect (
         x_d2 <= x_d1;
         y_d2 <= y_d1;
 
-        inside_d1 <= (h_d1 >= rect_x) &&
+        inside_d1 <= active &&
+                     (h_d1 >= rect_x) &&
                      (h_d1 < rect_x + RECT_W) &&
                      (v_d1 >= rect_y) &&
                      (v_d1 < rect_y + RECT_H);
