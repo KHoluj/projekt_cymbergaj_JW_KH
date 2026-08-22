@@ -5,7 +5,9 @@
  * Opis:
  * Top level fsm, uklad testowy:
  * AKTAULNIE: MENU -> GRA, brak powrotu, test fsm
+ * PAUSE / GOAL / GAME_OVER
  */
+
 
 module game_fsm
     import game_pkg::*;
@@ -13,7 +15,7 @@ module game_fsm
     input  logic clk,
     input  logic rst,
 
-    input  logic start_click,    // pulse: nacisniecie przycisku start
+    input  logic start_click,   / // pulse: nacisniecie przycisku start
 
     output game_state_t game_state
 );

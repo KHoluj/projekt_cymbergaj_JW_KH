@@ -1,24 +1,25 @@
 /**
  * 
  * Autor: KH
- *
+ * 
  * Opis:
- * Rysuje przycisk w obramowce w ustalonej pozycji, bramkowany
- * sygnalem 'active', nieaktywny podczas rozgrywki.
- * Struktura 2-cycle pipeline 
+ * Rysuje wypelnione paletki w czasie rzeczywistym x/y pozycja
+ * bramkowanie 'active'
  */
 
-module draw_button #(
-    parameter int X_POS  = 64,
-    parameter int Y_POS  = 64,
-    parameter int WIDTH  = 120,
-    parameter int HEIGHT = 48,
-    parameter logic [11:0] FILL_COLOR   = 12'h2_6_A,
-    parameter logic [11:0] BORDER_COLOR = 12'hF_F_F
+module draw_sprite #(
+    parameter int WIDTH  = 20,
+    parameter int HEIGHT = 20,
+    parameter logic [11:0] FILL_COLOR   = 12'hF_F_F,
+    parameter bit           DRAW_BORDER = 1'b1,
+    parameter logic [11:0] BORDER_COLOR = 12'h0_0_0
 )(
     input  logic clk,
-    input  logic rst,       // reset synchroniczny, active-high
-    input  logic active,   // przycisk rysowany w momencie sygnaly aktywacji
+    input  logic rst,
+    input  logic active,
+
+    input  logic [11:0] x_pos,
+    input  logic [11:0] y_pos,
 
     vga_if.in  vga_in,
     vga_if.out vga_out
@@ -26,10 +27,6 @@ module draw_button #(
 
     timeunit 1ns;
     timeprecision 1ps;
-
-    /**
-     * 2-cycle pipeline
-     */
 
     logic [10:0] hcount_d1, vcount_d1, hcount_d2, vcount_d2;
     logic hsync_d1, vsync_d1, hblnk_d1, vblnk_d1;
@@ -42,12 +39,12 @@ module draw_button #(
     logic on_border;
 
     assign in_rect = active &&
-                      (vga_in.hcount >= X_POS) && (vga_in.hcount < X_POS + WIDTH) &&
-                      (vga_in.vcount >= Y_POS) && (vga_in.vcount < Y_POS + HEIGHT);
+                      (vga_in.hcount >= x_pos) && (vga_in.hcount < x_pos + WIDTH) &&
+                      (vga_in.vcount >= y_pos) && (vga_in.vcount < y_pos + HEIGHT);
 
-    assign on_border = in_rect &&
-                        ((vga_in.hcount == X_POS) || (vga_in.hcount == X_POS + WIDTH - 1) ||
-                         (vga_in.vcount == Y_POS) || (vga_in.vcount == Y_POS + HEIGHT - 1));
+    assign on_border = DRAW_BORDER && in_rect &&
+                        ((vga_in.hcount == x_pos) || (vga_in.hcount == x_pos + WIDTH - 1) ||
+                         (vga_in.vcount == y_pos) || (vga_in.vcount == y_pos + HEIGHT - 1));
 
     always_ff @(posedge clk) begin
         if (rst) begin

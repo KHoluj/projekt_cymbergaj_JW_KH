@@ -4,8 +4,7 @@
  *
  * Opis:
  * Modul top gry cymbergaj
- * Aktualnie wersja na jedna plytke (chwiloowy brak mozliwosci inaczej)
- * Wersja z prostokatami zamiast paletek i kwadrat krazek
+ * Wersja na jednego gracza i AI placeholder
  */
 
 module top_airhockey
@@ -35,7 +34,6 @@ module top_airhockey
 
     logic rst;     
     logic rst_n;   // zachowane poniewaz nie zostaly jeszcze usuniete wszystkie pliki z labu
-
     rst_ctl u_rst_ctl (
         .clk(clk),
         .btn_rst(btn_rst),
@@ -60,8 +58,12 @@ module top_airhockey
      */
 
     vga_if vga_tim_to_bg();
-    vga_if vga_bg_to_paddle();
-    vga_if vga_paddle_to_btn();
+    vga_if vga_bg_to_p1();
+    vga_if vga_p1_to_p2();
+    vga_if vga_p2_to_puck();
+    vga_if vga_puck_to_s1();
+    vga_if vga_s1_to_s2();
+    vga_if vga_s2_to_btn();
     vga_if vga_btn_to_title();
     vga_if vga_title_to_label();
     vga_if vga_label_to_mouse();
@@ -73,6 +75,19 @@ module top_airhockey
     assign vs = ~vga_out_final.vsync;
     assign hs = ~vga_out_final.hsync;
     assign {r, g, b} = vga_out_final.rgb;
+
+    /**
+     * Per-frame tick (~60 Hz), fizyka paletka clamp/AI/krazek 
+     */
+
+    logic frame_tick;
+
+    frame_tick_gen u_frame_tick_gen (
+        .clk(clk),
+        .rst(rst),
+        .vsync(vga_tim_to_bg.vsync),
+        .frame_tick(frame_tick)
+    );
 
     /**
      * Mouse raw + synchronised + screen-restricted
@@ -128,7 +143,7 @@ module top_airhockey
     end
 
     /**
-     * Menu: button + top-level FSM
+     *  Menu: button + top-level FSM
      */
 
     logic btn_hover, btn_click;
@@ -156,23 +171,74 @@ module top_airhockey
     );
 
     /**
-     * Placeholder, uproszczone elementy gry
+     * Paletka gracza 1 porusza sie za pomoca myszy po lewej stronie
      */
 
-    logic [11:0] rect_x_ctl, rect_y_ctl;
+    logic [11:0] p1_x, p1_y;
 
-    draw_rect_ctl u_rect_ctl (
+    paddle_ctl #(
+        .MIN_X(P1_MIN_X),
+        .MAX_X(P1_MAX_X),
+        .MIN_Y(PADDLE_MIN_Y),
+        .MAX_Y(PADDLE_MAX_Y)
+    ) u_paddle1_ctl (
         .clk(clk),
-        .rst_n(rst_n),
-        .mouse_x(mouse_x_restricted),
-        .mouse_y(mouse_y_restricted),
-        .mouse_left(mouse_left & play_active),
-        .rect_x(rect_x_ctl),
-        .rect_y(rect_y_ctl)
+        .rst(rst),
+        .in_x(mouse_x_restricted),
+        .in_y(mouse_y_restricted),
+        .paddle_x(p1_x),
+        .paddle_y(p1_y)
+    );
+
+    
+
+    logic [11:0] puck_x, puck_y;
+
+    /**
+     * Gracz 2: placeholder AI
+     */
+
+    logic [11:0] p2_x, p2_y;
+
+    paddle2_ai u_paddle2_ai (
+        .clk(clk),
+        .rst(rst),
+        .frame_tick(frame_tick),
+        .puck_y(puck_y),
+        .ai_x(p2_x),
+        .ai_y(p2_y)
     );
 
     /**
-     * Text ROMs: tytul ("AIR HOCKEY") napis przycisku ("START")
+     * Fizyka krazka i wynik
+     */
+
+    logic goal_p1, goal_p2;
+    logic [3:0] score_p1, score_p2;
+
+    puck_ctl u_puck_ctl (
+        .clk(clk),
+        .rst(rst),
+        .frame_tick(frame_tick),
+        .active(play_active),
+        .p1_x(p1_x), .p1_y(p1_y),
+        .p2_x(p2_x), .p2_y(p2_y),
+        .puck_x(puck_x), .puck_y(puck_y),
+        .goal_p1(goal_p1),
+        .goal_p2(goal_p2)
+    );
+
+    score_ctl u_score_ctl (
+        .clk(clk),
+        .rst(rst),
+        .goal_p1(goal_p1),
+        .goal_p2(goal_p2),
+        .score_p1(score_p1),
+        .score_p2(score_p2)
+    );
+
+    /**
+     * Text ROMs: tytyl ("AIR HOCKEY") napis przycisku ("START")
      */
 
     logic [10:0] title_font_addr, label_font_addr;
@@ -203,17 +269,66 @@ module top_airhockey
         .clk    (clk),
         .rst_n  (rst_n),
         .vga_in (vga_tim_to_bg.in),
-        .vga_out(vga_bg_to_paddle.out)
+        .vga_out(vga_bg_to_p1.out)
     );
 
-    draw_rect u_draw_rect (
-        .clk    (clk),
-        .rst_n  (rst_n),
-        .active (play_active),
-        .rect_x (rect_x_ctl),
-        .rect_y (rect_y_ctl),
-        .vga_in (vga_bg_to_paddle.in),
-        .vga_out(vga_paddle_to_btn.out)
+    draw_sprite #(
+        .WIDTH (PADDLE_W),
+        .HEIGHT(PADDLE_H),
+        .FILL_COLOR(PADDLE1_COLOR)
+    ) u_draw_p1 (
+        .clk(clk), .rst(rst),
+        .active(play_active),
+        .x_pos(p1_x), .y_pos(p1_y),
+        .vga_in (vga_bg_to_p1.in),
+        .vga_out(vga_p1_to_p2.out)
+    );
+
+    draw_sprite #(
+        .WIDTH (PADDLE_W),
+        .HEIGHT(PADDLE_H),
+        .FILL_COLOR(PADDLE2_COLOR)
+    ) u_draw_p2 (
+        .clk(clk), .rst(rst),
+        .active(play_active),
+        .x_pos(p2_x), .y_pos(p2_y),
+        .vga_in (vga_p1_to_p2.in),
+        .vga_out(vga_p2_to_puck.out)
+    );
+
+    draw_sprite #(
+        .WIDTH (PUCK_SIZE),
+        .HEIGHT(PUCK_SIZE),
+        .FILL_COLOR(PUCK_COLOR),
+        .DRAW_BORDER(1'b0)
+    ) u_draw_puck (
+        .clk(clk), .rst(rst),
+        .active(play_active),
+        .x_pos(puck_x), .y_pos(puck_y),
+        .vga_in (vga_p2_to_puck.in),
+        .vga_out(vga_puck_to_s1.out)
+    );
+
+    draw_digit #(
+        .X_POS(SCORE1_X),
+        .Y_POS(SCORE_Y)
+    ) u_draw_score1 (
+        .clk(clk), .rst(rst),
+        .active(play_active),
+        .value(score_p1),
+        .vga_in (vga_puck_to_s1.in),
+        .vga_out(vga_s1_to_s2.out)
+    );
+
+    draw_digit #(
+        .X_POS(SCORE2_X),
+        .Y_POS(SCORE_Y)
+    ) u_draw_score2 (
+        .clk(clk), .rst(rst),
+        .active(play_active),
+        .value(score_p2),
+        .vga_in (vga_s1_to_s2.in),
+        .vga_out(vga_s2_to_btn.out)
     );
 
     draw_button #(
@@ -227,7 +342,7 @@ module top_airhockey
         .clk    (clk),
         .rst    (rst),
         .active (menu_active),
-        .vga_in (vga_paddle_to_btn.in),
+        .vga_in (vga_s2_to_btn.in),
         .vga_out(vga_btn_to_title.out)
     );
 
