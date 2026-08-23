@@ -1,7 +1,18 @@
+/**
+ * Copyright (C) 2025  AGH University of Science and Technology
+ * MTM UEC2 - Air Hockey Project
+ *
+ * Description:
+ * Draws the mouse cursor overlay. Gated by 'active' so the cursor
+ * can be hidden during gameplay (it would otherwise sit drawn right
+ * on top of the paddle it's controlling) and shown only in the menu.
+ */
+
 module draw_mouse (
     input  logic clk,
     input  logic rst_n,
-    input  logic active,   // kursor rysowany tylko gdy 'active', inaczej pomijany
+    input  logic active,   // draw the cursor only when high; passthrough otherwise
+
     input  logic [11:0] mouse_x,
     input  logic [11:0] mouse_y,
 

@@ -6,7 +6,6 @@
  * Rysowanie przycisku napis
  */
 
-
 module draw_rect_char #(
     parameter int X_POS = 64,
     parameter int Y_POS = 64,
@@ -33,6 +32,7 @@ module draw_rect_char #(
 
     // Adres w gridzie 32x8.
     // Niezaleznie od WIDTH_PX/HEIGHT_PX 
+    // uses a subset of the columns/rows.
     assign char_xy   = {local_y[6:4], local_x[7:3]};
     assign char_line = local_y[3:0];
 

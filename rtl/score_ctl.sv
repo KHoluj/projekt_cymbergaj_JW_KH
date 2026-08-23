@@ -1,4 +1,5 @@
 /**
+/**
  * 
  * Autor: KH
  *
@@ -9,6 +10,7 @@
 module score_ctl (
     input  logic clk,
     input  logic rst,
+    input  logic clear,
 
     input  logic goal_p1,
     input  logic goal_p2,
@@ -23,12 +25,12 @@ module score_ctl (
     timeprecision 1ps;
 
     always_ff @(posedge clk) begin
-        if (rst) begin
+        if (rst || clear) begin
             score_p1_tens <= 4'd0;
             score_p1_ones <= 4'd0;
         end else if (goal_p1) begin
             if (score_p1_tens == 4'd9 && score_p1_ones == 4'd9) begin
-                // saturate at 99, do not roll over
+                // saturacja na wyniku 99, nie powraca do 0
             end else if (score_p1_ones == 4'd9) begin
                 score_p1_ones <= 4'd0;
                 score_p1_tens <= score_p1_tens + 4'd1;
@@ -39,12 +41,12 @@ module score_ctl (
     end
 
     always_ff @(posedge clk) begin
-        if (rst) begin
+        if (rst || clear) begin
             score_p2_tens <= 4'd0;
             score_p2_ones <= 4'd0;
         end else if (goal_p2) begin
             if (score_p2_tens == 4'd9 && score_p2_ones == 4'd9) begin
-                // saturate at 99, do not roll over
+                // saturacja na wyniku 99, nie powraca do 0
             end else if (score_p2_ones == 4'd9) begin
                 score_p2_ones <= 4'd0;
                 score_p2_tens <= score_p2_tens + 4'd1;

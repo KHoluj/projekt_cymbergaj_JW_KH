@@ -19,6 +19,7 @@ module rst_ctl (
     (* ASYNC_REG = "TRUE" *)
     logic [1:0] sync_ff;
     
+
     always_ff @(posedge clk or posedge btn_rst) begin
         if (btn_rst)
             sync_ff <= 2'b11;

@@ -1,4 +1,6 @@
 /**
+ * Copyright (C) 2025  AGH University of Science and Technology
+/**
  * 
  * Autor: JW
  *
@@ -18,7 +20,7 @@ module puck_ctl
     input  logic clk,
     input  logic rst,
     input  logic frame_tick,
-    input  logic active,   
+    input  logic active,  
 
     input  logic [11:0] p1_x, p1_y,
     input  logic [11:0] p2_x, p2_y,

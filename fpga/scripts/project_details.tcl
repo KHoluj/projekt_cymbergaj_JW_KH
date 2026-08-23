@@ -37,15 +37,15 @@ set sv_files {
     ../rtl/char_rom.sv
     ../rtl/draw_bg.sv
     ../rtl/draw_button.sv
+    ../rtl/draw_circle.sv
     ../rtl/draw_digit.sv
     ../rtl/draw_mouse.sv
     ../rtl/draw_rect_char.sv
-    ../rtl/draw_sprite.sv
+    ../rtl/draw_rink.sv
     ../rtl/font_rom.sv
     ../rtl/frame_tick_gen.sv
     ../rtl/game_fsm.sv
     ../rtl/game_pkg.sv
-    ../rtl/image_rom.sv
     ../rtl/menu_ctl.sv
     ../rtl/paddle_ctl.sv
     ../rtl/paddle2_ai.sv
@@ -73,6 +73,5 @@ set sv_files {
  }
 
 # Specify files for a memory initialization     -- EDIT
- set mem_files {
-    ../rtl/rect/image_rom.data
- }
+# set mem_files {
+#}
