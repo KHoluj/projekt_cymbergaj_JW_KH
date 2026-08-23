@@ -3,7 +3,7 @@
  * Autor: KH
  *
  * Opis:
- * Wynik dwu cyfrowy
+ * Wynik dwucyfrowy
  */
 
 module score_ctl (
@@ -13,8 +13,10 @@ module score_ctl (
     input  logic goal_p1,
     input  logic goal_p2,
 
-    output logic [3:0] score_p1,
-    output logic [3:0] score_p2
+    output logic [3:0] score_p1_tens,
+    output logic [3:0] score_p1_ones,
+    output logic [3:0] score_p2_tens,
+    output logic [3:0] score_p2_ones
 );
 
     timeunit 1ns;
@@ -22,13 +24,33 @@ module score_ctl (
 
     always_ff @(posedge clk) begin
         if (rst) begin
-            score_p1 <= 4'd0;
-            score_p2 <= 4'd0;
-        end else begin
-            if (goal_p1 && score_p1 < 4'd9)
-                score_p1 <= score_p1 + 4'd1;
-            if (goal_p2 && score_p2 < 4'd9)
-                score_p2 <= score_p2 + 4'd1;
+            score_p1_tens <= 4'd0;
+            score_p1_ones <= 4'd0;
+        end else if (goal_p1) begin
+            if (score_p1_tens == 4'd9 && score_p1_ones == 4'd9) begin
+                // saturate at 99, do not roll over
+            end else if (score_p1_ones == 4'd9) begin
+                score_p1_ones <= 4'd0;
+                score_p1_tens <= score_p1_tens + 4'd1;
+            end else begin
+                score_p1_ones <= score_p1_ones + 4'd1;
+            end
+        end
+    end
+
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            score_p2_tens <= 4'd0;
+            score_p2_ones <= 4'd0;
+        end else if (goal_p2) begin
+            if (score_p2_tens == 4'd9 && score_p2_ones == 4'd9) begin
+                // saturate at 99, do not roll over
+            end else if (score_p2_ones == 4'd9) begin
+                score_p2_ones <= 4'd0;
+                score_p2_tens <= score_p2_tens + 4'd1;
+            end else begin
+                score_p2_ones <= score_p2_ones + 4'd1;
+            end
         end
     end
 

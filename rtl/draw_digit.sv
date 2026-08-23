@@ -4,7 +4,7 @@
  *
  * Opis:
  * Rysuje wynik jednocyfrowy w okreslonej pozycji na ekranie
- * Zmiany w czasie rzeczywistym
+ * Zmiany w czasie rzeczywistym, 
  */
 
 module draw_digit #(

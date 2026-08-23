@@ -6,6 +6,7 @@
  * Fizyka krazka. Pozycja aktualizowana na frame_tick
  * Odbicie od krawedzi, bramka na lewej i prawej (testowo)
  * Przejscie przez krawedz bramki skutkuje golem
+ * predkosc krazka zmienia sie podczas kolizji z paletka
  *
  * Predkosc zamieniana na liczbe calkowitra o kroku px/frame 
  * jedna stala predkosc
@@ -18,12 +19,13 @@ module puck_ctl
     input  logic rst,
     input  logic frame_tick,
     input  logic active,   
+
     input  logic [11:0] p1_x, p1_y,
     input  logic [11:0] p2_x, p2_y,
 
     output logic [11:0] puck_x, puck_y,
-    output logic goal_p1,   // 1-cycle pulse: player 1 scored (puck exited past TABLE_X1)
-    output logic goal_p2    // 1-cycle pulse: player 2 scored (puck exited past TABLE_X0)
+    output logic goal_p1,   // 1-cycle pulse: gracz 1 zdobywa punkt (krazek przekroczyl linie TABLE_X1)
+    output logic goal_p2    // 1-cycle pulse: gracz 2 zdobywa punkt (krazek przekroczyl linie TABLE_X0)
 );
 
     timeunit 1ns;
@@ -40,6 +42,14 @@ module puck_ctl
     );
         paddle_hit = (px < bx + PADDLE_W) && (px + PUCK_SIZE > bx) &&
                      (py < by + PADDLE_H) && (py + PUCK_SIZE > by);
+    endfunction
+
+    // Zwraca predkosc + PUCK_SPEED_STEP, ograniczenie na PUCK_SPEED_MAX.
+    function automatic logic signed [12:0] speed_up(input logic signed [12:0] speed);
+        logic signed [12:0] mag, boosted;
+        mag     = (speed < 0) ? -speed : speed;
+        boosted = mag + PUCK_SPEED_STEP;
+        speed_up = (boosted > PUCK_SPEED_MAX) ? PUCK_SPEED_MAX : boosted;
     endfunction
 
     always_ff @(posedge clk) begin
@@ -62,7 +72,7 @@ module puck_ctl
                 nvx = vx;
                 nvy = vy;
 
-                // Top / bottom o.
+                // Top / bottom odbicie, brak zmiany predkosci.
                 if (ny <= TABLE_Y0) begin
                     ny  = TABLE_Y0;
                     nvy = -vy;
@@ -73,10 +83,10 @@ module puck_ctl
 
                 // Kolizja z paletka, zapobiega powtarzaniu na kazdy tick
                 if (nvx < 0 && paddle_hit(nx[11:0], ny[11:0], p1_x, p1_y)) begin
-                    nvx = -nvx;
+                    nvx = speed_up(nvx);              
                     nx  = $signed({1'b0, p1_x}) + PADDLE_W;
                 end else if (nvx > 0 && paddle_hit(nx[11:0], ny[11:0], p2_x, p2_y)) begin
-                    nvx = -nvx;
+                    nvx = -speed_up(nvx);              
                     nx  = $signed({1'b0, p2_x}) - PUCK_SIZE;
                 end
 

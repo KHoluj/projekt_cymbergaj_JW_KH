@@ -3,8 +3,7 @@
  * Autor: KH
  * 
  * Opis:
- * Rysuje wypelnione paletki w czasie rzeczywistym x/y pozycja
- * bramkowanie 'active'
+ * Rysuje wypelniony prostokat w czasie rzeczywistym o pozycji x/y
  */
 
 module draw_sprite #(

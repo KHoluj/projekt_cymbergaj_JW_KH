@@ -6,6 +6,7 @@
  * Rysowanie przycisku napis
  */
 
+
 module draw_rect_char #(
     parameter int X_POS = 64,
     parameter int Y_POS = 64,

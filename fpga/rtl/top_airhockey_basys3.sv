@@ -3,7 +3,6 @@
  * Plik top gry airhockey
  */
 
-
 module top_airhockey_basys3 (
         input  wire clk,
         input  wire btnC,
@@ -37,6 +36,7 @@ module top_airhockey_basys3 (
      * FPGA submodules placement
      */
 
+    
     clk_wiz_0 u_clk_wiz (
         .clk(clk),
         .clk_pix(clk_pix),

@@ -4,6 +4,7 @@
  *
  * Opis:
  * Sterowanie paletka: input x/y pozycja myszy, ograniczenie do polowy
+ * plus paletka sterowana ai
  */
 
 module paddle_ctl #(

@@ -1,7 +1,7 @@
 module draw_mouse (
     input  logic clk,
     input  logic rst_n,
-
+    input  logic active,   // kursor rysowany tylko gdy 'active', inaczej pomijany
     input  logic [11:0] mouse_x,
     input  logic [11:0] mouse_y,
 
@@ -47,7 +47,7 @@ module draw_mouse (
             vga_out.vblnk  <= vga_in.vblnk;
             vga_out.hblnk  <= vga_in.hblnk;
 
-            vga_out.rgb <= rgb_mouse;
+            vga_out.rgb <= active ? rgb_mouse : vga_in.rgb;
         end
     end
 

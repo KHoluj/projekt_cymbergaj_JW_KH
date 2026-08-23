@@ -6,6 +6,7 @@
  * Generyczny przycisk, click-edge wykrywanie, poprzez pozycje myszy
  */
 
+
 module menu_ctl #(
     parameter int BTN_X = 0,
     parameter int BTN_Y = 0,

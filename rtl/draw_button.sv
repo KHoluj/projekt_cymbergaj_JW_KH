@@ -18,7 +18,7 @@ module draw_button #(
 )(
     input  logic clk,
     input  logic rst,       // reset synchroniczny, active-high
-    input  logic active,   // przycisk rysowany w momencie sygnaly aktywacji
+    input  logic active,    // przycisk rysowany w momencie sygnaly aktywacji
 
     vga_if.in  vga_in,
     vga_if.out vga_out

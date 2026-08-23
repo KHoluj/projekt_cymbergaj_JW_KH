@@ -28,7 +28,6 @@ package game_pkg;
     localparam logic [11:0] BTN_BORDER_COLOR = 12'hF_F_F;
 
     // Napis przycisku ("START")
-
     localparam int BTN_LABEL_W = 48;   // 6 chars * 8 px
     localparam int BTN_LABEL_H = 16;   // 1 char row
     localparam int BTN_LABEL_X = BTN_X + (BTN_W - BTN_LABEL_W)/2;
@@ -55,7 +54,7 @@ package game_pkg;
     localparam int GOAL_Y1 = (TABLE_Y0 + TABLE_Y1)/2 + GOAL_H/2;
 
     /**
-     * Paddles.
+     * Paletki.
      */
     localparam int PADDLE_W = 16;
     localparam int PADDLE_H = 100;
@@ -71,7 +70,9 @@ package game_pkg;
     localparam int PADDLE_MIN_Y = TABLE_Y0;
     localparam int PADDLE_MAX_Y = TABLE_Y1 - PADDLE_H;
 
-    
+    // Fixed X used by the placeholder AI for player 2 (single-board
+    // test only -- once the inter-board link exists, player 2's
+    // paddle x/y come from the peer board instead).
     localparam int P2_AI_X = TABLE_X1 - 60;
 
     /**
@@ -79,14 +80,23 @@ package game_pkg;
      */
     localparam int PUCK_SIZE = 20;
     localparam logic [11:0] PUCK_COLOR = 12'hF_F_F;
-    localparam int PUCK_SPEED_INIT = 3;   // px per frame tick, each axis
+    localparam int PUCK_SPEED_INIT = 3;   // px per frame tick
+
+    // Zmiana predkosci krazka podczas odbicia od paletki
+    // brak zmiany podczas odbicia od sciany
+    localparam int PUCK_SPEED_STEP = 1;
+    localparam int PUCK_SPEED_MAX  = 9;
 
     /**
      * Wyswietlanie wyniku.
      */
     localparam logic [11:0] SCORE_COLOR = 12'hF_F_0;
-    localparam int SCORE1_X = MID_X - 40;
-    localparam int SCORE2_X = MID_X + 32;
+    localparam int SCORE_DIGIT_GAP = 10;  
+
+    localparam int SCORE1_ONES_X = MID_X - 40;
+    localparam int SCORE1_TENS_X = SCORE1_ONES_X - SCORE_DIGIT_GAP;
+    localparam int SCORE2_TENS_X = MID_X + 32;
+    localparam int SCORE2_ONES_X = SCORE2_TENS_X + SCORE_DIGIT_GAP;
     localparam int SCORE_Y  = 20;
 
 endpackage

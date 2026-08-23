@@ -34,6 +34,7 @@ module top_airhockey
 
     logic rst;     
     logic rst_n;   // zachowane poniewaz nie zostaly jeszcze usuniete wszystkie pliki z labu
+
     rst_ctl u_rst_ctl (
         .clk(clk),
         .btn_rst(btn_rst),
@@ -61,9 +62,11 @@ module top_airhockey
     vga_if vga_bg_to_p1();
     vga_if vga_p1_to_p2();
     vga_if vga_p2_to_puck();
-    vga_if vga_puck_to_s1();
-    vga_if vga_s1_to_s2();
-    vga_if vga_s2_to_btn();
+    vga_if vga_puck_to_s1t();
+    vga_if vga_s1t_to_s1o();
+    vga_if vga_s1o_to_s2t();
+    vga_if vga_s2t_to_s2o();
+    vga_if vga_s2o_to_btn();
     vga_if vga_btn_to_title();
     vga_if vga_title_to_label();
     vga_if vga_label_to_mouse();
@@ -143,7 +146,7 @@ module top_airhockey
     end
 
     /**
-     *  Menu: button + top-level FSM
+     * Menu: przycisk + top-level FSM
      */
 
     logic btn_hover, btn_click;
@@ -214,7 +217,7 @@ module top_airhockey
      */
 
     logic goal_p1, goal_p2;
-    logic [3:0] score_p1, score_p2;
+    logic [3:0] score_p1_tens, score_p1_ones, score_p2_tens, score_p2_ones;
 
     puck_ctl u_puck_ctl (
         .clk(clk),
@@ -233,12 +236,14 @@ module top_airhockey
         .rst(rst),
         .goal_p1(goal_p1),
         .goal_p2(goal_p2),
-        .score_p1(score_p1),
-        .score_p2(score_p2)
+        .score_p1_tens(score_p1_tens),
+        .score_p1_ones(score_p1_ones),
+        .score_p2_tens(score_p2_tens),
+        .score_p2_ones(score_p2_ones)
     );
 
     /**
-     * Text ROMs: tytyl ("AIR HOCKEY") napis przycisku ("START")
+     * Text ROMs: tytul ("AIR HOCKEY") napis przycisku ("START")
      */
 
     logic [10:0] title_font_addr, label_font_addr;
@@ -306,29 +311,51 @@ module top_airhockey
         .active(play_active),
         .x_pos(puck_x), .y_pos(puck_y),
         .vga_in (vga_p2_to_puck.in),
-        .vga_out(vga_puck_to_s1.out)
+        .vga_out(vga_puck_to_s1t.out)
     );
 
     draw_digit #(
-        .X_POS(SCORE1_X),
+        .X_POS(SCORE1_TENS_X),
         .Y_POS(SCORE_Y)
-    ) u_draw_score1 (
+    ) u_draw_score1_tens (
         .clk(clk), .rst(rst),
         .active(play_active),
-        .value(score_p1),
-        .vga_in (vga_puck_to_s1.in),
-        .vga_out(vga_s1_to_s2.out)
+        .value(score_p1_tens),
+        .vga_in (vga_puck_to_s1t.in),
+        .vga_out(vga_s1t_to_s1o.out)
     );
 
     draw_digit #(
-        .X_POS(SCORE2_X),
+        .X_POS(SCORE1_ONES_X),
         .Y_POS(SCORE_Y)
-    ) u_draw_score2 (
+    ) u_draw_score1_ones (
         .clk(clk), .rst(rst),
         .active(play_active),
-        .value(score_p2),
-        .vga_in (vga_s1_to_s2.in),
-        .vga_out(vga_s2_to_btn.out)
+        .value(score_p1_ones),
+        .vga_in (vga_s1t_to_s1o.in),
+        .vga_out(vga_s1o_to_s2t.out)
+    );
+
+    draw_digit #(
+        .X_POS(SCORE2_TENS_X),
+        .Y_POS(SCORE_Y)
+    ) u_draw_score2_tens (
+        .clk(clk), .rst(rst),
+        .active(play_active),
+        .value(score_p2_tens),
+        .vga_in (vga_s1o_to_s2t.in),
+        .vga_out(vga_s2t_to_s2o.out)
+    );
+
+    draw_digit #(
+        .X_POS(SCORE2_ONES_X),
+        .Y_POS(SCORE_Y)
+    ) u_draw_score2_ones (
+        .clk(clk), .rst(rst),
+        .active(play_active),
+        .value(score_p2_ones),
+        .vga_in (vga_s2t_to_s2o.in),
+        .vga_out(vga_s2o_to_btn.out)
     );
 
     draw_button #(
@@ -342,7 +369,7 @@ module top_airhockey
         .clk    (clk),
         .rst    (rst),
         .active (menu_active),
-        .vga_in (vga_s2_to_btn.in),
+        .vga_in (vga_s2o_to_btn.in),
         .vga_out(vga_btn_to_title.out)
     );
 
@@ -425,6 +452,7 @@ module top_airhockey
     draw_mouse u_draw_mouse (
         .clk   (clk),
         .rst_n (rst_n),
+        .active(menu_active),
         .vga_in(vga_label_to_mouse.in),
         .vga_out(vga_out_final.out),
         .mouse_x(mouse_x_restricted),

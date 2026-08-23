@@ -15,7 +15,7 @@ module game_fsm
     input  logic clk,
     input  logic rst,
 
-    input  logic start_click,   / // pulse: nacisniecie przycisku start
+    input  logic start_click,   // pulse: nacisniecie przycisku start
 
     output game_state_t game_state
 );
@@ -29,7 +29,7 @@ module game_fsm
         end else begin
             unique case (game_state)
                 ST_MENU: if (start_click) game_state <= ST_PLAY;
-                ST_PLAY: ; // no way back yet
+                ST_PLAY: ; 
                 default: game_state <= ST_MENU;
             endcase
         end
