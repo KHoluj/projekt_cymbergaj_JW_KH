@@ -248,3 +248,4 @@ hal_mtm_tb.sh <ścieżki do sprawdzanego pliku i plików zależnych>
 Podobnie jak w pliku `.prj`, pliki pakietów należy podawać jako pierwsze.
 
 Wynik analizy prezentowany jest w terminalu, a pełny log dostępny jest w pliku `xrun.log`.
+Komentarz testowy
