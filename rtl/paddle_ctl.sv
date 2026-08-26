@@ -7,7 +7,6 @@
  * plus paletka sterowana ai
  */
 
-
 module paddle_ctl #(
     parameter int MIN_X = 0,
     parameter int MAX_X = 1023,

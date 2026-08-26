@@ -13,6 +13,7 @@ module paddle2_ai
     input  logic clk,
     input  logic rst,
     input  logic frame_tick,
+    input  logic puck_served,
 
     input  logic [11:0] puck_y,
 
@@ -24,11 +25,14 @@ module paddle2_ai
     timeprecision 1ps;
 
     localparam int AI_STEP = 2;  // px per frame tick
+    localparam int HOME_Y  = (PADDLE_MIN_Y + PADDLE_MAX_Y) / 2;
 
     logic [11:0] target_y;
 
     always_comb begin
-        if (puck_y < PADDLE_MIN_Y)
+        if (!puck_served)
+            target_y = HOME_Y[11:0];
+        else if (puck_y < PADDLE_MIN_Y)
             target_y = PADDLE_MIN_Y[11:0];
         else if (puck_y > PADDLE_MAX_Y)
             target_y = PADDLE_MAX_Y[11:0];
@@ -40,7 +44,7 @@ module paddle2_ai
 
     always_ff @(posedge clk) begin
         if (rst) begin
-            ai_y <= ((PADDLE_MIN_Y + PADDLE_MAX_Y) / 2);
+            ai_y <= HOME_Y[11:0];
         end else if (frame_tick) begin
             if (target_y > ai_y + AI_STEP)
                 ai_y <= ai_y + AI_STEP;

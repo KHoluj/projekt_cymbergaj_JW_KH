@@ -33,7 +33,7 @@ module top_airhockey
      */
 
     logic rst;     
-    logic rst_n;   // zachowane poniewaz nie zostaly jeszcze usuniete wszystkie pliki z labu
+    logic rst_n;   
 
     rst_ctl u_rst_ctl (
         .clk(clk),
@@ -60,13 +60,14 @@ module top_airhockey
     assign game_over_active = (game_state == ST_GAME_OVER);
 
     /**
-     * Paletki, krazek, wynik - sygnaly deklarowane zawczasu razem
+     * Paletki, krazek, wynik
      */
 
     logic [11:0] p1_x, p1_y;
     logic [11:0] p2_x, p2_y;
     logic [11:0] puck_x, puck_y;
     logic goal_p1, goal_p2;
+    logic puck_served;
     logic [3:0] score_p1_tens, score_p1_ones, score_p2_tens, score_p2_ones;
 
     /**
@@ -242,6 +243,7 @@ module top_airhockey
         .clk(clk),
         .rst(rst),
         .frame_tick(frame_tick),
+        .puck_served(puck_served),
         .puck_y(puck_y),
         .ai_x(p2_x),
         .ai_y(p2_y)
@@ -260,7 +262,8 @@ module top_airhockey
         .p2_x(p2_x), .p2_y(p2_y),
         .puck_x(puck_x), .puck_y(puck_y),
         .goal_p1(goal_p1),
-        .goal_p2(goal_p2)
+        .goal_p2(goal_p2),
+        .puck_served(puck_served)
     );
 
     score_ctl u_score_ctl (

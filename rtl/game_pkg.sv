@@ -69,7 +69,11 @@ package game_pkg;
     localparam int GOAL_Y0 = (TABLE_Y0 + TABLE_Y1)/2 - GOAL_H/2;
     localparam int GOAL_Y1 = (TABLE_Y0 + TABLE_Y1)/2 + GOAL_H/2;
 
-    /**
+    
+    localparam int CENTER_Y = (TABLE_Y0 + TABLE_Y1) / 2;
+    localparam int CENTER_CIRCLE_RADIUS = 70;
+
+     /**
      * Paletki.
      */
     localparam int PADDLE_SIZE = 40;
@@ -96,16 +100,15 @@ package game_pkg;
      * Krazek.
      */
     localparam int PUCK_SIZE = 24;
-    localparam logic [11:0] PUCK_COLOR         = 12'hC_C_C;  // light gray body
-    localparam logic [11:0] PUCK_HILIGHT_COLOR = 12'hF_F_F;  // white highlight spot
-    localparam int PUCK_SPEED_INIT = 3;   // px per frame tick, each axis
+    localparam logic [11:0] PUCK_COLOR         = 12'hC_C_C;  
+    localparam logic [11:0] PUCK_HILIGHT_COLOR = 12'hF_F_F;  
 
     // Zmiana predkosci krazka podczas odbicia od paletki
     // brak zmiany podczas odbicia od sciany
     localparam int PUCK_SPEED_STEP = 1;
     localparam int PUCK_SPEED_MAX  = 9;
 
-    /**
+   /**
      * Wyswietlanie wyniku.
      */
     localparam logic [11:0] SCORE_COLOR = 12'hF_F_0;

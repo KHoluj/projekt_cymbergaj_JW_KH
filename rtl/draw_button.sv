@@ -8,7 +8,6 @@
  * Struktura 2-cycle pipeline 
  */
 
-
 module draw_button #(
     parameter int X_POS  = 64,
     parameter int Y_POS  = 64,
@@ -29,7 +28,7 @@ module draw_button #(
     timeprecision 1ps;
 
     /**
-     * 2-cycle pipeline
+     *  2-cycle pipeline
      */
 
     logic [10:0] hcount_d1, vcount_d1, hcount_d2, vcount_d2;

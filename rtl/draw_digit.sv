@@ -7,6 +7,7 @@
  * Zmiany w czasie rzeczywistym, 
  */
 
+
 module draw_digit #(
     parameter int X_POS = 0,
     parameter int Y_POS = 0

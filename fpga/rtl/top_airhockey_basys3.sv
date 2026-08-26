@@ -1,6 +1,6 @@
 /**
  * Autor: KH
- * Plik top gry airhockey
+ * Plik top basys3 gry airhockey
  */
 
 module top_airhockey_basys3 (
@@ -44,8 +44,7 @@ module top_airhockey_basys3 (
         .locked(locked)
     );
 
-    // Mirror pclk on a pin for use by the testbench;
-    // not functionally required for this design to work.
+    
 
     ODDR pclk_oddr (
         .Q(pclk_mirror),
