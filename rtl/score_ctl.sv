@@ -1,11 +1,12 @@
 /**
 /**
  * 
- * Autor: KH
+ * Autor: JW
  *
  * Opis:
  * Wynik dwucyfrowy
  */
+
 
 module score_ctl (
     input  logic clk,

@@ -14,6 +14,7 @@ module top_airhockey
         input  logic clk,          // 65 MHz VGA pixel clock (1024x768@60)
         input  logic clk100MHz,    // 100 MHz, used by the PS/2 mouse core
         input  logic btn_rst,      
+        input  logic btn_exit,     
 
         inout  logic ps2_clk,
         inout  logic ps2_data,
@@ -33,7 +34,7 @@ module top_airhockey
      */
 
     logic rst;     
-    logic rst_n;   
+    logic rst_n;  
 
     rst_ctl u_rst_ctl (
         .clk(clk),
@@ -42,6 +43,19 @@ module top_airhockey
     );
 
     assign rst_n = ~rst;
+
+    /**
+     * Fizyczny przycisk "EXIT" (btnL)
+     */
+
+    logic exit_btn_click;
+
+    btn_edge u_btn_edge_exit (
+        .clk(clk),
+        .rst(rst),
+        .btn_raw(btn_exit),
+        .pulse(exit_btn_click)
+    );
 
     /**
      * Game state
@@ -54,10 +68,12 @@ module top_airhockey
     logic play_active;
     logic menu_active;
     logic game_over_active;
+    logic settings_active;
 
-    assign play_active      = (game_state == ST_PLAY);
-    assign menu_active      = (game_state == ST_MENU);
+    assign play_active     = (game_state == ST_PLAY);
+    assign menu_active     = (game_state == ST_MENU);
     assign game_over_active = (game_state == ST_GAME_OVER);
+    assign settings_active = (game_state == ST_SETTINGS);
 
     /**
      * Paletki, krazek, wynik
@@ -69,6 +85,9 @@ module top_airhockey
     logic goal_p1, goal_p2;
     logic puck_served;
     logic [3:0] score_p1_tens, score_p1_ones, score_p2_tens, score_p2_ones;
+    logic [3:0] win_score;
+    logic [1:0] difficulty_sel;
+    logic [3:0] ai_step;
 
     /**
      * VGA pipeline interfaces
@@ -86,9 +105,17 @@ module top_airhockey
     vga_if vga_s2o_to_btn();
     vga_if vga_btn_to_title();
     vga_if vga_title_to_label();
-    vga_if vga_label_to_exitbtn();
-    vga_if vga_exitbtn_to_exitlabel();
-    vga_if vga_exitlabel_to_mouse();
+    vga_if vga_label_to_settingsbtn();
+    vga_if vga_settingsbtn_to_settingslabel();
+    vga_if vga_settingslabel_to_winlabel();
+    vga_if vga_winlabel_to_windigit();
+    vga_if vga_windigit_to_winplus();
+    vga_if vga_winplus_to_winpluslabel();
+    vga_if vga_winpluslabel_to_difflabel();
+    vga_if vga_difflabel_to_diffvalue();
+    vga_if vga_diffvalue_to_diffplus();
+    vga_if vga_diffplus_to_diffpluslabel();
+    vga_if vga_diffpluslabel_to_mouse();
     vga_if vga_out_final();
 
     assign vga_tim_to_bg.rgb = 12'h0_0_0;
@@ -185,29 +212,76 @@ module top_airhockey
         .click_pulse(shared_btn_click)
     );
 
-    logic exit_btn_hover, exit_btn_click;
+    logic settings_btn_hover, settings_btn_click;
 
     menu_ctl #(
-        .BTN_X(EXIT_BTN_X),
-        .BTN_Y(EXIT_BTN_Y),
-        .BTN_W(EXIT_BTN_W),
-        .BTN_H(EXIT_BTN_H)
-    ) u_menu_ctl_exit (
+        .BTN_X(SETTINGS_BTN_X),
+        .BTN_Y(SETTINGS_BTN_Y),
+        .BTN_W(SETTINGS_BTN_W),
+        .BTN_H(SETTINGS_BTN_H)
+    ) u_menu_ctl_settings (
         .clk(clk),
         .rst(rst),
         .mouse_x(mouse_x_restricted),
         .mouse_y(mouse_y_restricted),
         .mouse_left(mouse_left),
-        .hover(exit_btn_hover),
-        .click_pulse(exit_btn_click)
+        .hover(settings_btn_hover),
+        .click_pulse(settings_btn_click)
+    );
+
+    logic win_plus_hover, win_plus_click;
+
+    menu_ctl #(
+        .BTN_X(OPT_PLUS_BTN_X),
+        .BTN_Y(OPT_PLUS_BTN1_Y),
+        .BTN_W(OPT_PLUS_BTN_W),
+        .BTN_H(OPT_PLUS_BTN_H)
+    ) u_menu_ctl_win_plus (
+        .clk(clk),
+        .rst(rst),
+        .mouse_x(mouse_x_restricted),
+        .mouse_y(mouse_y_restricted),
+        .mouse_left(mouse_left),
+        .hover(win_plus_hover),
+        .click_pulse(win_plus_click)
+    );
+
+    logic diff_plus_hover, diff_plus_click;
+
+    menu_ctl #(
+        .BTN_X(OPT_PLUS_BTN_X),
+        .BTN_Y(OPT_PLUS_BTN2_Y),
+        .BTN_W(OPT_PLUS_BTN_W),
+        .BTN_H(OPT_PLUS_BTN_H)
+    ) u_menu_ctl_diff_plus (
+        .clk(clk),
+        .rst(rst),
+        .mouse_x(mouse_x_restricted),
+        .mouse_y(mouse_y_restricted),
+        .mouse_left(mouse_left),
+        .hover(diff_plus_hover),
+        .click_pulse(diff_plus_click)
+    );
+
+    settings_ctl u_settings_ctl (
+        .clk(clk),
+        .rst(rst),
+        .win_score_click(win_plus_click),
+        .difficulty_click(diff_plus_click),
+        .win_score(win_score),
+        .difficulty_sel(difficulty_sel),
+        .ai_step(ai_step)
     );
 
     game_fsm u_game_fsm (
         .clk(clk),
         .rst(rst),
         .start_click(shared_btn_click),
+        .settings_click(settings_btn_click),
+        .back_click(shared_btn_click),
         .menu_click(shared_btn_click),
         .exit_click(exit_btn_click),
+        .win_score(win_score),
         .score_p1_tens(score_p1_tens),
         .score_p1_ones(score_p1_ones),
         .score_p2_tens(score_p2_tens),
@@ -244,6 +318,7 @@ module top_airhockey
         .rst(rst),
         .frame_tick(frame_tick),
         .puck_served(puck_served),
+        .ai_step(ai_step),
         .puck_y(puck_y),
         .ai_x(p2_x),
         .ai_y(p2_y)
@@ -397,7 +472,7 @@ module top_airhockey
     ) u_draw_button (
         .clk    (clk),
         .rst    (rst),
-        .active (menu_active || game_over_active),
+        .active (menu_active || game_over_active || settings_active),
         .vga_in (vga_s2o_to_btn.in),
         .vga_out(vga_btn_to_title.out)
     );
@@ -410,7 +485,7 @@ module top_airhockey
     logic [3:0]  title_char_line;
     logic [7:0]  title_font_pixels;
     logic [10:0] title_font_addr;
-    logic [6:0]  title_code_menu, title_code_p1win, title_code_p2win;
+    logic [6:0]  title_code_menu, title_code_p1win, title_code_p2win, title_code_settings;
     logic [6:0]  title_char_code;
 
     assign title_font_addr = {title_char_code, title_char_line};
@@ -418,6 +493,8 @@ module top_airhockey
     always_comb begin
         if (menu_active)
             title_char_code = title_code_menu;
+        else if (settings_active)
+            title_char_code = title_code_settings;
         else if (winner_p2)
             title_char_code = title_code_p2win;
         else
@@ -475,6 +552,23 @@ module top_airhockey
         .char_code(title_code_p2win)
     );
 
+    char_rom #(
+        .TEXT({
+            "                                ",
+            "                                ",
+            "           SETTINGS             ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                "
+        })
+    ) u_char_rom_title_settings (
+        .clk(clk),
+        .char_xy(title_char_xy),
+        .char_code(title_code_settings)
+    );
+
     font_rom u_font_rom_title (
         .clk(clk),
         .addr(title_font_addr),
@@ -487,7 +581,7 @@ module top_airhockey
     ) u_draw_title (
         .clk   (clk),
         .rst   (rst),
-        .active(menu_active || game_over_active),
+        .active(menu_active || game_over_active || settings_active),
         .vga_in (vga_btn_to_title.in),
         .vga_out(vga_title_to_label.out),
         .char_xy(title_char_xy),
@@ -503,11 +597,19 @@ module top_airhockey
     logic [3:0]  label_char_line;
     logic [7:0]  label_font_pixels;
     logic [10:0] label_font_addr;
-    logic [6:0]  label_code_start, label_code_menu;
+    logic [6:0]  label_code_start, label_code_menu, label_code_back;
     logic [6:0]  label_char_code;
 
     assign label_font_addr = {label_char_code, label_char_line};
-    assign label_char_code = menu_active ? label_code_start : label_code_menu;
+
+    always_comb begin
+        if (menu_active)
+            label_char_code = label_code_start;
+        else if (settings_active)
+            label_char_code = label_code_back;
+        else
+            label_char_code = label_code_menu;
+    end
 
     char_rom #(
         .TEXT({
@@ -543,6 +645,23 @@ module top_airhockey
         .char_code(label_code_menu)
     );
 
+    char_rom #(
+        .TEXT({
+            "BACK                            ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                "
+        })
+    ) u_char_rom_label_back (
+        .clk(clk),
+        .char_xy(label_char_xy),
+        .char_code(label_code_back)
+    );
+
     font_rom u_font_rom_label (
         .clk(clk),
         .addr(label_font_addr),
@@ -557,9 +676,9 @@ module top_airhockey
     ) u_draw_label (
         .clk   (clk),
         .rst   (rst),
-        .active(menu_active || game_over_active),
+        .active(menu_active || game_over_active || settings_active),
         .vga_in (vga_title_to_label.in),
-        .vga_out(vga_label_to_exitbtn.out),
+        .vga_out(vga_label_to_settingsbtn.out),
         .char_xy(label_char_xy),
         .char_line(label_char_line),
         .char_line_pixels(label_font_pixels)
@@ -570,31 +689,31 @@ module top_airhockey
      */
 
     draw_button #(
-        .X_POS       (EXIT_BTN_X),
-        .Y_POS       (EXIT_BTN_Y),
-        .WIDTH       (EXIT_BTN_W),
-        .HEIGHT      (EXIT_BTN_H),
+        .X_POS       (SETTINGS_BTN_X),
+        .Y_POS       (SETTINGS_BTN_Y),
+        .WIDTH       (SETTINGS_BTN_W),
+        .HEIGHT      (SETTINGS_BTN_H),
         .FILL_COLOR  (BTN_FILL_COLOR),
         .BORDER_COLOR(BTN_BORDER_COLOR)
-    ) u_draw_exit_button (
+    ) u_draw_settings_button (
         .clk    (clk),
         .rst    (rst),
-        .active (play_active),
-        .vga_in (vga_label_to_exitbtn.in),
-        .vga_out(vga_exitbtn_to_exitlabel.out)
+        .active (menu_active),
+        .vga_in (vga_label_to_settingsbtn.in),
+        .vga_out(vga_settingsbtn_to_settingslabel.out)
     );
 
-    logic [7:0]  exit_char_xy;
-    logic [3:0]  exit_char_line;
-    logic [7:0]  exit_font_pixels;
-    logic [10:0] exit_font_addr;
-    logic [6:0]  exit_char_code;
+    logic [7:0]  settings_label_char_xy;
+    logic [3:0]  settings_label_char_line;
+    logic [7:0]  settings_label_font_pixels;
+    logic [10:0] settings_label_font_addr;
+    logic [6:0]  settings_label_char_code;
 
-    assign exit_font_addr = {exit_char_code, exit_char_line};
+    assign settings_label_font_addr = {settings_label_char_code, settings_label_char_line};
 
     char_rom #(
         .TEXT({
-            "EXIT                            ",
+            "SETTINGS                        ",
             "                                ",
             "                                ",
             "                                ",
@@ -603,39 +722,362 @@ module top_airhockey
             "                                ",
             "                                "
         })
-    ) u_char_rom_exit (
+    ) u_char_rom_settings_label (
         .clk(clk),
-        .char_xy(exit_char_xy),
-        .char_code(exit_char_code)
+        .char_xy(settings_label_char_xy),
+        .char_code(settings_label_char_code)
     );
 
-    font_rom u_font_rom_exit (
+    font_rom u_font_rom_settings_label (
         .clk(clk),
-        .addr(exit_font_addr),
-        .char_line_pixels(exit_font_pixels)
+        .addr(settings_label_font_addr),
+        .char_line_pixels(settings_label_font_pixels)
     );
 
     draw_rect_char #(
-        .X_POS    (EXIT_LABEL_X),
-        .Y_POS    (EXIT_LABEL_Y),
-        .WIDTH_PX (EXIT_LABEL_W),
-        .HEIGHT_PX(EXIT_LABEL_H)
-    ) u_draw_exit_label (
+        .X_POS    (SETTINGS_LABEL_X),
+        .Y_POS    (SETTINGS_LABEL_Y),
+        .WIDTH_PX (SETTINGS_LABEL_W),
+        .HEIGHT_PX(SETTINGS_LABEL_H)
+    ) u_draw_settings_label (
         .clk   (clk),
         .rst   (rst),
-        .active(play_active),
-        .vga_in (vga_exitbtn_to_exitlabel.in),
-        .vga_out(vga_exitlabel_to_mouse.out),
-        .char_xy(exit_char_xy),
-        .char_line(exit_char_line),
-        .char_line_pixels(exit_font_pixels)
+        .active(menu_active),
+        .vga_in (vga_settingsbtn_to_settingslabel.in),
+        .vga_out(vga_settingslabel_to_winlabel.out),
+        .char_xy(settings_label_char_xy),
+        .char_line(settings_label_char_line),
+        .char_line_pixels(settings_label_font_pixels)
+    );
+
+    /**
+     * Ekran ustawien: "WIN SCORE:" etykieta + wartosc + "+"
+     */
+
+    logic [7:0]  winlbl_char_xy;
+    logic [3:0]  winlbl_char_line;
+    logic [7:0]  winlbl_font_pixels;
+    logic [10:0] winlbl_font_addr;
+    logic [6:0]  winlbl_char_code;
+
+    assign winlbl_font_addr = {winlbl_char_code, winlbl_char_line};
+
+    char_rom #(
+        .TEXT({
+            "WIN SCORE:                      ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                "
+        })
+    ) u_char_rom_winlbl (
+        .clk(clk),
+        .char_xy(winlbl_char_xy),
+        .char_code(winlbl_char_code)
+    );
+
+    font_rom u_font_rom_winlbl (
+        .clk(clk),
+        .addr(winlbl_font_addr),
+        .char_line_pixels(winlbl_font_pixels)
+    );
+
+    draw_rect_char #(
+        .X_POS(OPT_LABEL_X),
+        .Y_POS(WIN_SCORE_ROW_Y)
+    ) u_draw_winlbl (
+        .clk   (clk),
+        .rst   (rst),
+        .active(settings_active),
+        .vga_in (vga_settingslabel_to_winlabel.in),
+        .vga_out(vga_winlabel_to_windigit.out),
+        .char_xy(winlbl_char_xy),
+        .char_line(winlbl_char_line),
+        .char_line_pixels(winlbl_font_pixels)
+    );
+
+    draw_digit #(
+        .X_POS(OPT_VALUE_X),
+        .Y_POS(WIN_SCORE_ROW_Y)
+    ) u_draw_win_value (
+        .clk(clk), .rst(rst),
+        .active(settings_active),
+        .value(win_score),
+        .vga_in (vga_winlabel_to_windigit.in),
+        .vga_out(vga_windigit_to_winplus.out)
+    );
+
+    draw_button #(
+        .X_POS       (OPT_PLUS_BTN_X),
+        .Y_POS       (OPT_PLUS_BTN1_Y),
+        .WIDTH       (OPT_PLUS_BTN_W),
+        .HEIGHT      (OPT_PLUS_BTN_H),
+        .FILL_COLOR  (BTN_FILL_COLOR),
+        .BORDER_COLOR(BTN_BORDER_COLOR)
+    ) u_draw_win_plus_button (
+        .clk    (clk),
+        .rst    (rst),
+        .active (settings_active),
+        .vga_in (vga_windigit_to_winplus.in),
+        .vga_out(vga_winplus_to_winpluslabel.out)
+    );
+
+    logic [7:0]  winplus_char_xy;
+    logic [3:0]  winplus_char_line;
+    logic [7:0]  winplus_font_pixels;
+    logic [10:0] winplus_font_addr;
+    logic [6:0]  winplus_char_code;
+
+    assign winplus_font_addr = {winplus_char_code, winplus_char_line};
+
+    char_rom #(
+        .TEXT({
+            "+                               ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                "
+        })
+    ) u_char_rom_winplus (
+        .clk(clk),
+        .char_xy(winplus_char_xy),
+        .char_code(winplus_char_code)
+    );
+
+    font_rom u_font_rom_winplus (
+        .clk(clk),
+        .addr(winplus_font_addr),
+        .char_line_pixels(winplus_font_pixels)
+    );
+
+    draw_rect_char #(
+        .X_POS    (OPT_PLUS_LABEL_X),
+        .Y_POS    (OPT_PLUS_LABEL1_Y),
+        .WIDTH_PX (OPT_PLUS_LABEL_W),
+        .HEIGHT_PX(OPT_PLUS_LABEL_H)
+    ) u_draw_winplus_label (
+        .clk   (clk),
+        .rst   (rst),
+        .active(settings_active),
+        .vga_in (vga_winplus_to_winpluslabel.in),
+        .vga_out(vga_winpluslabel_to_difflabel.out),
+        .char_xy(winplus_char_xy),
+        .char_line(winplus_char_line),
+        .char_line_pixels(winplus_font_pixels)
+    );
+
+    /**
+     * Ekran ustawien: "DIFFICULTY", etykieta + wartosc + "+"
+     */
+
+    logic [7:0]  difflbl_char_xy;
+    logic [3:0]  difflbl_char_line;
+    logic [7:0]  difflbl_font_pixels;
+    logic [10:0] difflbl_font_addr;
+    logic [6:0]  difflbl_char_code;
+
+    assign difflbl_font_addr = {difflbl_char_code, difflbl_char_line};
+
+    char_rom #(
+        .TEXT({
+            "DIFFICULTY:                     ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                "
+        })
+    ) u_char_rom_difflbl (
+        .clk(clk),
+        .char_xy(difflbl_char_xy),
+        .char_code(difflbl_char_code)
+    );
+
+    font_rom u_font_rom_difflbl (
+        .clk(clk),
+        .addr(difflbl_font_addr),
+        .char_line_pixels(difflbl_font_pixels)
+    );
+
+    draw_rect_char #(
+        .X_POS(OPT_LABEL_X),
+        .Y_POS(DIFFICULTY_ROW_Y)
+    ) u_draw_difflbl (
+        .clk   (clk),
+        .rst   (rst),
+        .active(settings_active),
+        .vga_in (vga_winpluslabel_to_difflabel.in),
+        .vga_out(vga_difflabel_to_diffvalue.out),
+        .char_xy(difflbl_char_xy),
+        .char_line(difflbl_char_line),
+        .char_line_pixels(difflbl_font_pixels)
+    );
+
+    logic [7:0]  diffval_char_xy;
+    logic [3:0]  diffval_char_line;
+    logic [7:0]  diffval_font_pixels;
+    logic [10:0] diffval_font_addr;
+    logic [6:0]  diffval_code_easy, diffval_code_normal, diffval_code_hard;
+    logic [6:0]  diffval_char_code;
+
+    assign diffval_font_addr = {diffval_char_code, diffval_char_line};
+
+    always_comb begin
+        case (difficulty_sel)
+            2'd0:    diffval_char_code = diffval_code_easy;
+            2'd1:    diffval_char_code = diffval_code_normal;
+            default: diffval_char_code = diffval_code_hard;
+        endcase
+    end
+
+    char_rom #(
+        .TEXT({
+            "EASY                            ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                "
+        })
+    ) u_char_rom_diff_easy (
+        .clk(clk),
+        .char_xy(diffval_char_xy),
+        .char_code(diffval_code_easy)
+    );
+
+    char_rom #(
+        .TEXT({
+            "NORMAL                          ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                "
+        })
+    ) u_char_rom_diff_normal (
+        .clk(clk),
+        .char_xy(diffval_char_xy),
+        .char_code(diffval_code_normal)
+    );
+
+    char_rom #(
+        .TEXT({
+            "HARD                            ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                "
+        })
+    ) u_char_rom_diff_hard (
+        .clk(clk),
+        .char_xy(diffval_char_xy),
+        .char_code(diffval_code_hard)
+    );
+
+    font_rom u_font_rom_diffval (
+        .clk(clk),
+        .addr(diffval_font_addr),
+        .char_line_pixels(diffval_font_pixels)
+    );
+
+    draw_rect_char #(
+        .X_POS    (OPT_VALUE_X),
+        .Y_POS    (DIFFICULTY_ROW_Y),
+        .WIDTH_PX (DIFF_VALUE_W),
+        .HEIGHT_PX(DIFF_VALUE_H)
+    ) u_draw_diffval (
+        .clk   (clk),
+        .rst   (rst),
+        .active(settings_active),
+        .vga_in (vga_difflabel_to_diffvalue.in),
+        .vga_out(vga_diffvalue_to_diffplus.out),
+        .char_xy(diffval_char_xy),
+        .char_line(diffval_char_line),
+        .char_line_pixels(diffval_font_pixels)
+    );
+
+    draw_button #(
+        .X_POS       (OPT_PLUS_BTN_X),
+        .Y_POS       (OPT_PLUS_BTN2_Y),
+        .WIDTH       (OPT_PLUS_BTN_W),
+        .HEIGHT      (OPT_PLUS_BTN_H),
+        .FILL_COLOR  (BTN_FILL_COLOR),
+        .BORDER_COLOR(BTN_BORDER_COLOR)
+    ) u_draw_diff_plus_button (
+        .clk    (clk),
+        .rst    (rst),
+        .active (settings_active),
+        .vga_in (vga_diffvalue_to_diffplus.in),
+        .vga_out(vga_diffplus_to_diffpluslabel.out)
+    );
+
+    logic [7:0]  diffplus_char_xy;
+    logic [3:0]  diffplus_char_line;
+    logic [7:0]  diffplus_font_pixels;
+    logic [10:0] diffplus_font_addr;
+    logic [6:0]  diffplus_char_code;
+
+    assign diffplus_font_addr = {diffplus_char_code, diffplus_char_line};
+
+    char_rom #(
+        .TEXT({
+            "+                               ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                ",
+            "                                "
+        })
+    ) u_char_rom_diffplus (
+        .clk(clk),
+        .char_xy(diffplus_char_xy),
+        .char_code(diffplus_char_code)
+    );
+
+    font_rom u_font_rom_diffplus (
+        .clk(clk),
+        .addr(diffplus_font_addr),
+        .char_line_pixels(diffplus_font_pixels)
+    );
+
+    draw_rect_char #(
+        .X_POS    (OPT_PLUS_LABEL_X),
+        .Y_POS    (OPT_PLUS_LABEL2_Y),
+        .WIDTH_PX (OPT_PLUS_LABEL_W),
+        .HEIGHT_PX(OPT_PLUS_LABEL_H)
+    ) u_draw_diffplus_label (
+        .clk   (clk),
+        .rst   (rst),
+        .active(settings_active),
+        .vga_in (vga_diffplus_to_diffpluslabel.in),
+        .vga_out(vga_diffpluslabel_to_mouse.out),
+        .char_xy(diffplus_char_xy),
+        .char_line(diffplus_char_line),
+        .char_line_pixels(diffplus_font_pixels)
     );
 
     draw_mouse u_draw_mouse (
         .clk   (clk),
         .rst_n (rst_n),
-        .active(menu_active || game_over_active),
-        .vga_in(vga_exitlabel_to_mouse.in),
+        .active(menu_active || game_over_active || settings_active),
+        .vga_in(vga_diffpluslabel_to_mouse.in),
         .vga_out(vga_out_final.out),
         .mouse_x(mouse_x_restricted),
         .mouse_y(mouse_y_restricted)

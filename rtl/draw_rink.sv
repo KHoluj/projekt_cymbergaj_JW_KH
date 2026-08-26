@@ -9,7 +9,6 @@
  * indykacja goal
  */
 
-
 module draw_rink
     import game_pkg::*;
 (
@@ -42,7 +41,7 @@ module draw_rink
     assign in_table_x = (vga_in.hcount >= TABLE_X0) && (vga_in.hcount < TABLE_X1);
     assign in_table_y = (vga_in.vcount >= TABLE_Y0) && (vga_in.vcount < TABLE_Y1);
 
-    
+    // Bramka jest realnym otworem w lini
     assign in_goal_gap_y = (vga_in.vcount >= GOAL_Y0) && (vga_in.vcount < GOAL_Y1);
 
     assign on_border = active && (

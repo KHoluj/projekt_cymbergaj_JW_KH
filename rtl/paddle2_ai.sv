@@ -14,6 +14,7 @@ module paddle2_ai
     input  logic rst,
     input  logic frame_tick,
     input  logic puck_served,
+    input  logic [3:0] ai_step,   
 
     input  logic [11:0] puck_y,
 
@@ -24,8 +25,7 @@ module paddle2_ai
     timeunit 1ns;
     timeprecision 1ps;
 
-    localparam int AI_STEP = 2;  // px per frame tick
-    localparam int HOME_Y  = (PADDLE_MIN_Y + PADDLE_MAX_Y) / 2;
+    localparam int HOME_Y = (PADDLE_MIN_Y + PADDLE_MAX_Y) / 2;
 
     logic [11:0] target_y;
 
@@ -46,10 +46,10 @@ module paddle2_ai
         if (rst) begin
             ai_y <= HOME_Y[11:0];
         end else if (frame_tick) begin
-            if (target_y > ai_y + AI_STEP)
-                ai_y <= ai_y + AI_STEP;
-            else if (target_y + AI_STEP < ai_y)
-                ai_y <= ai_y - AI_STEP;
+            if (target_y > ai_y + ai_step)
+                ai_y <= ai_y + ai_step;
+            else if (target_y + ai_step < ai_y)
+                ai_y <= ai_y - ai_step;
             else
                 ai_y <= target_y;
         end

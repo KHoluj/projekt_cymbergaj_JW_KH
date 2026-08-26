@@ -34,6 +34,7 @@ set xdc_files {
 
 # Specify SystemVerilog design files location   -- EDIT
 set sv_files {
+    ../rtl/btn_edge.sv
     ../rtl/char_rom.sv
     ../rtl/draw_bg.sv
     ../rtl/draw_button.sv
@@ -52,6 +53,7 @@ set sv_files {
     ../rtl/puck_ctl.sv
     ../rtl/rst_ctl.sv
     ../rtl/score_ctl.sv
+    ../rtl/settings_ctl.sv
     ../rtl/top_airhockey.sv
     ../rtl/vga_if.sv
     ../rtl/vga_pkg.sv

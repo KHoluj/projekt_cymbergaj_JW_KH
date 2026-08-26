@@ -28,7 +28,7 @@ module draw_button #(
     timeprecision 1ps;
 
     /**
-     *  2-cycle pipeline
+     * 2-cycle pipeline
      */
 
     logic [10:0] hcount_d1, vcount_d1, hcount_d2, vcount_d2;

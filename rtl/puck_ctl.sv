@@ -18,21 +18,21 @@
  * Zalezy od pozycji krazka oraz paletki, zmiana predkosci
  * Uzalezniona od predkosci paletki
  */
-
 module puck_ctl
     import game_pkg::*;
 (
     input  logic clk,
     input  logic rst,
     input  logic frame_tick,
-    input  logic active,   // przytrzymanie krazka na srodku stolu
+    input  logic active,    // przytrzymanie krazka na srodku stolu
+
 
     input  logic [11:0] p1_x, p1_y,
     input  logic [11:0] p2_x, p2_y,
 
     output logic [11:0] puck_x, puck_y,
-    output logic goal_p1,        // 1-cycle pulse: gracz 1 zdobywa
-    output logic goal_p2,        // 1-cycle pulse: gracz 2 zdobywa punkt 
+    output logic goal_p1,        // 1: gracz 1 zdobywa
+    output logic goal_p2,        // 1: gracz 2 zdobywa punkt
     output logic puck_served     // 0 do momentu kontaktu przy serwisie
 );
 
@@ -111,7 +111,7 @@ module puck_ctl
                     speed_mag  = (nvx < 0 ? -nvx : nvx) + PUCK_SPEED_STEP +
                                  (p1_vx < 0 ? -p1_vx : p1_vx);
                     nvx = clamp_speed(speed_mag);
-                    nvy = clamp_speed(p1_vy + (hit_offset >>> 2) + (vy >>> 1));
+                    nvy = clamp_speed((p1_vy <<< 1) + (hit_offset >>> 3));
                     nx  = $signed({1'b0, p1_x}) + PADDLE_W;
                     puck_served <= 1'b1;
                 end else if (nvx >= 0 && paddle_hit(nx[11:0], ny[11:0], p2_x, p2_y)) begin
@@ -119,12 +119,12 @@ module puck_ctl
                     speed_mag  = (nvx < 0 ? -nvx : nvx) + PUCK_SPEED_STEP +
                                  (p2_vx < 0 ? -p2_vx : p2_vx);
                     nvx = -clamp_speed(speed_mag);
-                    nvy = clamp_speed(p2_vy + (hit_offset >>> 2) + (vy >>> 1));
+                    nvy = clamp_speed((p2_vy <<< 1) + (hit_offset >>> 3));
                     nx  = $signed({1'b0, p2_x}) - PUCK_SIZE;
                     puck_served <= 1'b1;
                 end
 
-                // Detekcja bramki, odbicie od lewej i prawej sciany
+                // Detekcja bramki, odbicie od lewej i prawej sciany.
                 in_goal_y = !((ny + PUCK_SIZE <= GOAL_Y0) || (ny >= GOAL_Y1));
 
                 if (!in_goal_y) begin
@@ -141,7 +141,7 @@ module puck_ctl
                     vx     <= nvx;
                     vy     <= nvy;
                 end else begin
-                    // Detekcja pelnego przekroczenia lini bramki
+                    
                     if (nx < TABLE_X0 - PUCK_SIZE) begin
                         goal_p2     <= 1'b1;
                         puck_x      <= SPAWN_X[11:0];

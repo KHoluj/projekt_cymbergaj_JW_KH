@@ -6,6 +6,7 @@
  * Reset kontrolera
  */
 
+
 module rst_ctl (
         input  logic clk,
         input  logic btn_rst,   

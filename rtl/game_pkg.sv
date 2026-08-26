@@ -5,7 +5,6 @@
  * Opis:
  * Paczka z parametrami i stanami do gry cymbergaj
  */
-
 package game_pkg;
 
     import vga_pkg::*;
@@ -14,7 +13,8 @@ package game_pkg;
     typedef enum logic [1:0] {
         ST_MENU      = 2'b00,
         ST_PLAY      = 2'b01,
-        ST_GAME_OVER = 2'b10
+        ST_GAME_OVER = 2'b10,
+        ST_SETTINGS  = 2'b11
     } game_state_t;
 
     /**
@@ -42,18 +42,18 @@ package game_pkg;
     localparam int TITLE_X = (HOR_PIXELS/2) - 128;
     localparam int TITLE_Y = 180;
 
-    /**
+   /**
      * Przycisk "EXIT" do wyjscia z gry w ST_PLAY
      */
-    localparam int EXIT_BTN_W = 90;
-    localparam int EXIT_BTN_H = 32;
-    localparam int EXIT_BTN_X = HOR_PIXELS - EXIT_BTN_W - 20;
-    localparam int EXIT_BTN_Y = 16;
+    localparam int SETTINGS_BTN_W = 160;
+    localparam int SETTINGS_BTN_H = 48;
+    localparam int SETTINGS_BTN_X = (HOR_PIXELS/2) - (SETTINGS_BTN_W/2);
+    localparam int SETTINGS_BTN_Y = BTN_Y + BTN_H + 24;
 
-    localparam int EXIT_LABEL_W = 32;  // 4 chars * 8 px ("EXIT")
-    localparam int EXIT_LABEL_H = 16;
-    localparam int EXIT_LABEL_X = EXIT_BTN_X + (EXIT_BTN_W - EXIT_LABEL_W)/2;
-    localparam int EXIT_LABEL_Y = EXIT_BTN_Y + (EXIT_BTN_H - EXIT_LABEL_H)/2;
+    localparam int SETTINGS_LABEL_W = 64;  // "SETTINGS" = 8 chars * 8 px
+    localparam int SETTINGS_LABEL_H = 16;
+    localparam int SETTINGS_LABEL_X = SETTINGS_BTN_X + (SETTINGS_BTN_W - SETTINGS_LABEL_W)/2;
+    localparam int SETTINGS_LABEL_Y = SETTINGS_BTN_Y + (SETTINGS_BTN_H - SETTINGS_LABEL_H)/2;
 
     /**
      * Geometria pola gry,
@@ -69,7 +69,7 @@ package game_pkg;
     localparam int GOAL_Y0 = (TABLE_Y0 + TABLE_Y1)/2 - GOAL_H/2;
     localparam int GOAL_Y1 = (TABLE_Y0 + TABLE_Y1)/2 + GOAL_H/2;
 
-    
+    // Prawdziwy srodek pola gry
     localparam int CENTER_Y = (TABLE_Y0 + TABLE_Y1) / 2;
     localparam int CENTER_CIRCLE_RADIUS = 70;
 
@@ -96,7 +96,7 @@ package game_pkg;
     
     localparam int P2_AI_X = TABLE_X1 - 60;
 
-    /**
+   /**
      * Krazek.
      */
     localparam int PUCK_SIZE = 24;
@@ -121,8 +121,27 @@ package game_pkg;
     localparam int SCORE_Y  = 20;
 
     /**
-     * Kondycja wygranej
+     * Ustawienia
      */
-    localparam int WIN_SCORE = 7;
+    localparam int OPT_LABEL_X = (HOR_PIXELS/2) - 180;
+    localparam int OPT_VALUE_X = OPT_LABEL_X + 140;
+
+    localparam int WIN_SCORE_ROW_Y  = 240;
+    localparam int DIFFICULTY_ROW_Y = 300;
+
+    localparam int OPT_PLUS_BTN_W = 36;
+    localparam int OPT_PLUS_BTN_H = 32;
+    localparam int OPT_PLUS_BTN_X = OPT_VALUE_X + 70;
+    localparam int OPT_PLUS_BTN1_Y = WIN_SCORE_ROW_Y - 8;
+    localparam int OPT_PLUS_BTN2_Y = DIFFICULTY_ROW_Y - 8;
+
+    localparam int OPT_PLUS_LABEL_W = 8;
+    localparam int OPT_PLUS_LABEL_H = 16;
+    localparam int OPT_PLUS_LABEL_X = OPT_PLUS_BTN_X + (OPT_PLUS_BTN_W - OPT_PLUS_LABEL_W)/2;
+    localparam int OPT_PLUS_LABEL1_Y = OPT_PLUS_BTN1_Y + (OPT_PLUS_BTN_H - OPT_PLUS_LABEL_H)/2;
+    localparam int OPT_PLUS_LABEL2_Y = OPT_PLUS_BTN2_Y + (OPT_PLUS_BTN_H - OPT_PLUS_LABEL_H)/2;
+
+    localparam int DIFF_VALUE_W = 56;  
+    localparam int DIFF_VALUE_H = 16;
 
 endpackage

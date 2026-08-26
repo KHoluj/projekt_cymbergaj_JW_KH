@@ -3,9 +3,11 @@
  * Plik top basys3 gry airhockey
  */
 
+
 module top_airhockey_basys3 (
         input  wire clk,
         input  wire btnC,
+        input  wire btnL,
         inout wire PS2Clk,
         inout wire PS2Data,
         output wire Vsync,
@@ -64,6 +66,7 @@ module top_airhockey_basys3 (
         .clk(clk_pix),
         .clk100MHz(clk100MHz),
         .btn_rst(btnC),
+        .btn_exit(btnL),
 
         .ps2_clk(PS2Clk),
         .ps2_data(PS2Data),

@@ -20,10 +20,13 @@ module game_fsm
     input  logic clk,
     input  logic rst,
 
-    input  logic start_click,   // dzielony przycisk, interpretacja w ST_MENU
-    input  logic menu_click,    // dzielony przycisk, interpretacja w ST_GAME_OVER
-    input  logic exit_click,    // przycisk EXIT, interpretacja w ST_PLAY
+    input  logic start_click,      // dzielony przycisk, interpretacja w ST_MENU
+    input  logic settings_click,   // przycisk ustawien, interpretacja w ST_MENU
+    input  logic back_click,       // dzielony przycisk, interpretacja w ST_SETTINGS
+    input  logic menu_click,       // dzielony przycisk, interpretacja w ST_GAME_OVER
+    input  logic exit_click,       // przycisk (fizyczny btnL), interpretacja w ST_GAME
 
+    input  logic [3:0] win_score,  
     input  logic [3:0] score_p1_tens, score_p1_ones,
     input  logic [3:0] score_p2_tens, score_p2_ones,
 
@@ -37,8 +40,8 @@ module game_fsm
 
     logic p1_won, p2_won;
 
-    assign p1_won = (score_p1_tens > 4'd0) || (score_p1_ones >= WIN_SCORE[3:0]);
-    assign p2_won = (score_p2_tens > 4'd0) || (score_p2_ones >= WIN_SCORE[3:0]);
+    assign p1_won = (score_p1_tens > 4'd0) || (score_p1_ones >= win_score);
+    assign p2_won = (score_p2_tens > 4'd0) || (score_p2_ones >= win_score);
 
     always_ff @(posedge clk) begin
         if (rst) begin
@@ -53,7 +56,13 @@ module game_fsm
                     if (start_click) begin
                         game_state  <= ST_PLAY;
                         score_clear <= 1'b1;
+                    end else if (settings_click) begin
+                        game_state <= ST_SETTINGS;
                     end
+                end
+
+                ST_SETTINGS: begin
+                    if (back_click) game_state <= ST_MENU;
                 end
 
                 ST_PLAY: begin

@@ -30,8 +30,7 @@ module draw_rect_char #(
     assign local_x = vga_in.hcount - X_POS;
     assign local_y = vga_in.vcount - Y_POS;
 
-    // Adres w gridzie 32x8.
-    // Niezaleznie od WIDTH_PX/HEIGHT_PX 
+    
     assign char_xy   = {local_y[6:4], local_x[7:3]};
     assign char_line = local_y[3:0];
 
