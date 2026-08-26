@@ -9,8 +9,8 @@ set_property PACKAGE_PIN W5 [get_ports clk]
 	#create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clk]
 
 ## Switches
-#set_property PACKAGE_PIN V17 [get_ports {sw[0]}]
-	#set_property IOSTANDARD LVCMOS33 [get_ports {sw[0]}]
+set_property PACKAGE_PIN V17 [get_ports {sw0}]
+	set_property IOSTANDARD LVCMOS33 [get_ports {sw0}]
 #set_property PACKAGE_PIN V16 [get_ports {sw[1]}]
 	#set_property IOSTANDARD LVCMOS33 [get_ports {sw[1]}]
 #set_property PACKAGE_PIN W16 [get_ports {sw[2]}]
@@ -44,8 +44,8 @@ set_property PACKAGE_PIN W5 [get_ports clk]
 
 
 ## LEDs
-#set_property PACKAGE_PIN U16 [get_ports {led[0]}]
-	#set_property IOSTANDARD LVCMOS33 [get_ports {led[0]}]
+set_property PACKAGE_PIN U16 [get_ports {led0}]
+	set_property IOSTANDARD LVCMOS33 [get_ports {led0}]
 #set_property PACKAGE_PIN E19 [get_ports {led[1]}]
 	#set_property IOSTANDARD LVCMOS33 [get_ports {led[1]}]
 #set_property PACKAGE_PIN U19 [get_ports {led[2]}]
@@ -126,11 +126,11 @@ set_property PACKAGE_PIN W19 [get_ports btnL]
 set_property PACKAGE_PIN J1 [get_ports {JA1}]
 	set_property IOSTANDARD LVCMOS33 [get_ports {JA1}]
 ##Sch name = JA2
-#set_property PACKAGE_PIN L2 [get_ports {JA[1]}]
-	#set_property IOSTANDARD LVCMOS33 [get_ports {JA[1]}]
+set_property PACKAGE_PIN L2 [get_ports {ja_tx}]
+	set_property IOSTANDARD LVCMOS33 [get_ports {ja_tx}]
 ##Sch name = JA3
-#set_property PACKAGE_PIN J2 [get_ports {JA[2]}]
-	#set_property IOSTANDARD LVCMOS33 [get_ports {JA[2]}]
+set_property PACKAGE_PIN J2 [get_ports {ja_rx}]
+	set_property IOSTANDARD LVCMOS33 [get_ports {ja_rx}]
 ##Sch name = JA4
 #set_property PACKAGE_PIN G2 [get_ports {JA[3]}]
 	#set_property IOSTANDARD LVCMOS33 [get_ports {JA[3]}]
@@ -297,3 +297,9 @@ set_property PACKAGE_PIN B17 [get_ports PS2Data]
 ## Configuration options, can be used for all designs
 set_property CONFIG_VOLTAGE 3.3 [current_design]
 set_property CFGBVS VCCO [current_design]
+
+
+set_false_path -to [get_cells -hier -filter {NAME =~ "*mouse_x_sync1_reg*"}]
+set_false_path -to [get_cells -hier -filter {NAME =~ "*mouse_y_sync1_reg*"}]
+set_false_path -to [get_cells -hier -filter {NAME =~ "*mouse_left_sync1_reg*"}]
+

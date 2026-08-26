@@ -34,30 +34,43 @@ set xdc_files {
 
 # Specify SystemVerilog design files location   -- EDIT
 set sv_files {
-    ../rtl/btn_edge.sv
-    ../rtl/char_rom.sv
-    ../rtl/draw_bg.sv
-    ../rtl/draw_button.sv
-    ../rtl/draw_circle.sv
-    ../rtl/draw_digit.sv
-    ../rtl/draw_mouse.sv
-    ../rtl/draw_rect_char.sv
-    ../rtl/draw_rink.sv
-    ../rtl/font_rom.sv
-    ../rtl/frame_tick_gen.sv
-    ../rtl/game_fsm.sv
-    ../rtl/game_pkg.sv
-    ../rtl/menu_ctl.sv
-    ../rtl/paddle_ctl.sv
-    ../rtl/paddle2_ai.sv
-    ../rtl/puck_ctl.sv
-    ../rtl/rst_ctl.sv
-    ../rtl/score_ctl.sv
-    ../rtl/settings_ctl.sv
+    ../rtl/comm/link_rx_ctl.sv
+    ../rtl/comm/link_tx_ctl.sv 
+    ../rtl/comm/uart_rx.sv 
+    ../rtl/comm/uart_tx.sv 
+
+    ../rtl/common/btn_edge.sv
+    ../rtl/common/rst_ctl.sv
+
+    ../rtl/draw/char_rom.sv
+    ../rtl/draw/draw_bg.sv
+    ../rtl/draw/draw_button.sv
+    ../rtl/draw/draw_circle.sv
+    ../rtl/draw/draw_digit.sv
+    ../rtl/draw/draw_menu_bg.sv
+    ../rtl/draw/draw_mouse.sv
+    ../rtl/draw/draw_rect_char.sv
+    ../rtl/draw/draw_rink.sv
+    ../rtl/draw/font_rom.sv
+
+    
+    ../rtl/game/game_fsm.sv
+    ../rtl/game/game_pkg.sv
+    ../rtl/game/menu_ctl.sv
+    ../rtl/game/paddle_ctl.sv
+    ../rtl/game/paddle2_ai.sv
+    ../rtl/game/puck_ctl.sv
+    ../rtl/game/score_ctl.sv
+    ../rtl/game/settings_ctl.sv
+
+
+    ../rtl/vga/frame_tick_gen.sv
+    ../rtl/vga/vga_if.sv
+    ../rtl/vga/vga_pkg.sv
+    ../rtl/vga/vga_timing.sv
+    
     ../rtl/top_airhockey.sv
-    ../rtl/vga_if.sv
-    ../rtl/vga_pkg.sv
-    ../rtl/vga_timing.sv
+
     rtl/top_airhockey_basys3.sv
 }
 

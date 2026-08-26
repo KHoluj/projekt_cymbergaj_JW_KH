@@ -8,8 +8,15 @@ module top_airhockey_basys3 (
         input  wire clk,
         input  wire btnC,
         input  wire btnL,
+        input  wire sw0,
+
         inout wire PS2Clk,
         inout wire PS2Data,
+
+        output wire ja_tx,
+        input  wire ja_rx,
+        output wire led0,
+
         output wire Vsync,
         output wire Hsync,
         output wire [3:0] vgaRed,
@@ -25,7 +32,7 @@ module top_airhockey_basys3 (
      * Local variables and signals
      */
 
-    wire clk_pix, clk100MHz, locked;   // clk_pix = 65 MHz pixel clock (1024x768@60)
+    wire clk_pix, clk100MHz, locked;   
     wire pclk_mirror;
 
     /**
@@ -35,7 +42,7 @@ module top_airhockey_basys3 (
     assign JA1 = pclk_mirror;
 
     /**
-     * FPGA submodules placement
+     * FPGA submodules
      */
 
     
@@ -67,9 +74,14 @@ module top_airhockey_basys3 (
         .clk100MHz(clk100MHz),
         .btn_rst(btnC),
         .btn_exit(btnL),
+        .sw_is_host(sw0),
 
         .ps2_clk(PS2Clk),
         .ps2_data(PS2Data),
+
+        .link_tx(ja_tx),
+        .link_rx(ja_rx),
+        .led_link_ok(led0),
 
         .r(vgaRed),
         .g(vgaGreen),
