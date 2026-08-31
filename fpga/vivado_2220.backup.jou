@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2021.2 (64-bit)
+# SW Build 3367213 on Tue Oct 19 02:47:39 MDT 2021
+# IP Build 3369179 on Thu Oct 21 08:25:16 MDT 2021
+# Start of session at: Sat Aug 29 23:59:41 2026
+# Process ID: 2220
+# Current directory: /home/student/jwojciechowska/Desktop/projekt_cymbergaj_JW_KH-projekt_gra/fpga
+# Command line: vivado -mode tcl -source scripts/generate_bitstream.tcl
+# Log file: /home/student/jwojciechowska/Desktop/projekt_cymbergaj_JW_KH-projekt_gra/fpga/vivado.log
+# Journal file: /home/student/jwojciechowska/Desktop/projekt_cymbergaj_JW_KH-projekt_gra/fpga/vivado.jou
+# Running On: cadence30, OS: Linux, CPU Frequency: 3774.609 MHz, CPU Physical cores: 4, Host memory: 16720 MB
+#-----------------------------------------------------------
+source scripts/generate_bitstream.tcl

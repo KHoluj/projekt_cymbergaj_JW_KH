@@ -1,0 +1,217 @@
+/*
+
+Xilinx Vivado v2021.2 (64-bit) [Major: 2021, Minor: 2]
+SW Build: 3367213 on Tue Oct 19 02:47:39 MDT 2021
+IP Build: 3369179 on Thu Oct 21 08:25:16 MDT 2021
+
+Process ID (PID): 11677
+License: Customer
+Mode: GUI Mode
+
+Current time: 	Sat Aug 29 17:00:07 CEST 2026
+Time zone: 	Central European Standard Time (Europe/Warsaw)
+
+OS: CentOS Linux release 7.9.2009 (Core)
+OS Version: 3.10.0-1160.119.1.el7.x86_64
+OS Architecture: amd64
+Available processors (cores): 8
+
+Display: 52.0
+Screen size: 1536x793
+Screen resolution (DPI): 100
+Available screens: 1
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+Scale size: 12
+
+Java version: 	11.0.11 64-bit
+Java home: 	/home_local/Xilinx/Vivado/2021.2/tps/lnx64/jre11.0.11_9
+Java executable: 	/home_local/Xilinx/Vivado/2021.2/tps/lnx64/jre11.0.11_9/bin/java
+Java arguments: 	[-Dsun.java2d.pmoffscreen=false, -Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2, -Dsun.java2d.xrender=false, -Djdk.gtk.version=2, -Dsun.java2d.uiScale.enabled=false, -Xverify:none, -Dswing.aatext=true, -XX:-UsePerfData, -Djdk.map.althashing.threshold=512, -XX:StringTableSize=4072, --add-opens=java.base/java.nio=ALL-UNNAMED, --add-opens=java.desktop/sun.swing=ALL-UNNAMED, --add-opens=java.desktop/javax.swing=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.tree=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.synth=ALL-UNNAMED, --add-opens=java.desktop/com.sun.awt=ALL-UNNAMED, --add-opens=java.desktop/sun.awt.X11=ALL-UNNAMED, -XX:NewSize=60m, -XX:MaxNewSize=60m, -Xms256m, -Xmx3072m, -Xss5m, -Xrs]
+Java initial memory (-Xms): 	256 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	jwojciechowska
+User home directory: /home/student/jwojciechowska
+User working directory: /home/student/jwojciechowska/Desktop/projekt_cymbergaj_JW_KH-projekt_gra
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: /home_local/Xilinx/Vivado
+HDI_APPROOT: /home_local/Xilinx/Vivado/2021.2
+RDI_DATADIR: /home_local/Xilinx/Vivado/2021.2/data
+RDI_BINDIR: /home_local/Xilinx/Vivado/2021.2/bin
+
+Vivado preferences file: /student/jwojciechowska/.Xilinx/Vivado/2021.2/vivado.xml
+Vivado preferences directory: /student/jwojciechowska/.Xilinx/Vivado/2021.2/
+Vivado layouts directory: /home/student/jwojciechowska/.Xilinx/Vivado/2021.2/data/layouts
+PlanAhead jar file: 	/home_local/Xilinx/Vivado/2021.2/lib/classes/planAhead.jar
+Vivado log file: 	/home/student/jwojciechowska/Desktop/projekt_cymbergaj_JW_KH-projekt_gra/vivado.log
+Vivado journal file: 	/home/student/jwojciechowska/Desktop/projekt_cymbergaj_JW_KH-projekt_gra/vivado.jou
+Engine tmp dir: 	./.Xil/Vivado-11677-cadence30
+
+Xilinx Environment Variables
+----------------------------
+XILINX: /home_local/Xilinx/Vivado/2021.2/ids_lite/ISE
+XILINXD_LICENSE_FILE: 2100@192.168.0.214
+XILINX_DSP: /home_local/Xilinx/Vivado/2021.2/ids_lite/ISE
+XILINX_HLS: /home_local/Xilinx/Vitis_HLS/2021.2
+XILINX_PLANAHEAD: /home_local/Xilinx/Vivado/2021.2
+XILINX_VITIS: 
+XILINX_VIVADO: /home_local/Xilinx/Vivado/2021.2
+XILINX_VIVADO_HLS: /home_local/Xilinx/Vivado/2021.2
+
+
+GUI allocated memory:	256 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 5,830 MB
+
+Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// HMemoryUtils.trashcanNow. Engine heap size: 5,830 MB. GUI used memory: 50 MB. Current time: 8/29/26, 5:00:08 PM CEST
+selectButton(PAResourceEtoH.GettingStartedView_OPEN_EXAMPLE_PROJECT, "Open Example Project"); // y
+dismissDialog("Open Example Project"); // a
+selectButton(PAResourceEtoH.GettingStartedView_OPEN_PROJECT, "Open Project"); // y
+// Run Command: PAResourceCommand.PACommandNames_OPEN_PROJECT
+setFileChooser("/home/student/jwojciechowska/Desktop/projekt_cymbergaj_JW_KH-projekt_gra/fpga/build/airhockey_project.xpr");
+// Opening Vivado Project: /home/student/jwojciechowska/Desktop/projekt_cymbergaj_JW_KH-projekt_gra/fpga/build/airhockey_project.xpr. Version: Vivado v2021.2 
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: FLOW_ADDED
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project /home/student/jwojciechowska/Desktop/projekt_cymbergaj_JW_KH-projekt_gra/fpga/build/airhockey_project.xpr 
+// Tcl Message: INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory '/home/student/jwojciechowska/Desktop/projekt_cymbergaj_JW_KH-projekt_gra/fpga/build/airhockey_project.gen/sources_1'. 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 104 MB (+106784kb) [00:00:40]
+// [Engine Memory]: 5,896 MB (+6031079kb) [00:00:40]
+// WARNING: HEventQueue.dispatchEvent() is taking  5862 ms.
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home_local/Xilinx/Vivado/2021.2/data/ip'. 
+// HMemoryUtils.trashcanNow. Engine heap size: 5,918 MB. GUI used memory: 58 MB. Current time: 8/29/26, 5:00:34 PM CEST
+// Tcl Message: open_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:10 . Memory (MB): peak = 7778.316 ; gain = 79.043 ; free physical = 7336 ; free virtual = 18157 
+// Project name: airhockey_project; location: /home/student/jwojciechowska/Desktop/projekt_cymbergaj_JW_KH-projekt_gra/fpga/build; part: xc7a35tcpg236-1
+// Elapsed time: 11 seconds
+dismissDialog("Open Project"); // bA
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// Tcl Message: update_compile_order -fileset sources_1 
+// [GUI Memory]: 111 MB (+1275kb) [00:00:52]
+// Elapsed time: 19 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Generate Bitstream]", 20, false); // n
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+selectButton("OptionPane.button", "OK"); // JButton
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// 'cR' command handler elapsed time: 9 seconds
+// TclEventType: RUN_MODIFY
+dismissDialog("Launch Runs"); // cU
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run impl_1 -prev_step  
+// TclEventType: RUN_MODIFY
+// Elapsed time: 23 seconds
+selectButton(RDIResource.ProgressDialog_BACKGROUND, "Background"); // a
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ag
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_EDIT, "Edit"); // ag
+dismissMenu(PAResourceItoN.MainMenuMgr_EDIT, "Edit"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // al
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_EDIT, "Edit"); // ag
+dismissMenu(PAResourceItoN.MainMenuMgr_EDIT, "Edit"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // ag
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 61 MB. Current time: 8/29/26, 5:01:34 PM CEST
+selectMenu(PAResourceItoN.MainMenuMgr_SETTINGS, "Settings"); // al
+selectMenu(PAResourceCommand.PACommandNames_SIMULATION_RUN, "Run Simulation"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN, "Open Implemented Design"); // al
+dismissMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_REPORTS, "Reports"); // ag
+dismissMenu(PAResourceItoN.MainMenuMgr_REPORTS, "Reports"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // ag
+dismissMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_REPORTS, "Reports"); // ag
+dismissMenu(PAResourceItoN.MainMenuMgr_REPORTS, "Reports"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_WINDOW, "Window"); // ag
+dismissMenu(PAResourceItoN.MainMenuMgr_WINDOW, "Window"); // ag
+selectMenu(RDIResource.MainWinMenuMgr_LAYOUT, "Layout"); // ag
+dismissMenu(RDIResource.MainWinMenuMgr_LAYOUT, "Layout"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_VIEW, "View"); // ag
+dismissMenu(PAResourceItoN.MainMenuMgr_VIEW, "View"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_HELP, "Help"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_DESIGN_HUBS, "Design Hubs"); // al
+dismissMenu(PAResourceItoN.MainMenuMgr_HELP, "Help"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ag
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // al
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // al
+selectMenu(PAResourceItoN.MainMenuMgr_EXPORT, "Export"); // al
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ag
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 65 MB. Current time: 8/29/26, 5:02:04 PM CEST
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Open Hardware Manager]", 21, true); // n - Node
+// [GUI Memory]: 118 MB (+1486kb) [00:02:18]
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Open Hardware Manager]", 21); // n
+collapseTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Open Hardware Manager]", 21); // n
+collapseTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Open Hardware Manager]", 21); // n
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Open Hardware Manager]", 21); // n
+selectButton("HStatusBar_ProgressStatusItem_Cancel", "Cancel"); // NullButton
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 106 MB. Current time: 8/29/26, 5:02:34 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 120 MB. Current time: 8/29/26, 5:03:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 120 MB. Current time: 8/29/26, 5:03:34 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 120 MB. Current time: 8/29/26, 5:04:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 121 MB. Current time: 8/29/26, 5:04:34 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 121 MB. Current time: 8/29/26, 5:05:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 63 MB. Current time: 8/29/26, 5:05:34 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 120 MB. Current time: 8/29/26, 5:06:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 121 MB. Current time: 8/29/26, 5:06:34 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 121 MB. Current time: 8/29/26, 5:07:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 121 MB. Current time: 8/29/26, 5:07:34 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 121 MB. Current time: 8/29/26, 5:08:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 121 MB. Current time: 8/29/26, 5:08:35 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 120 MB. Current time: 8/29/26, 5:09:05 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 121 MB. Current time: 8/29/26, 5:09:35 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 63 MB. Current time: 8/29/26, 5:10:05 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 121 MB. Current time: 8/29/26, 5:10:35 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 121 MB. Current time: 8/29/26, 5:11:05 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 62 MB. Current time: 8/29/26, 5:11:35 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 118 MB. Current time: 8/29/26, 5:12:05 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 68 MB. Current time: 8/29/26, 5:12:35 PM CEST
+// WARNING: HEventQueue.dispatchEvent() is taking  110453 ms.
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 61 MB. Current time: 8/29/26, 5:16:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 62 MB. Current time: 8/29/26, 5:16:34 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 87 MB. Current time: 8/29/26, 5:17:34 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 61 MB. Current time: 8/29/26, 5:18:34 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 61 MB. Current time: 8/29/26, 5:19:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 61 MB. Current time: 8/29/26, 5:19:35 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 103 MB. Current time: 8/29/26, 5:20:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 104 MB. Current time: 8/29/26, 5:20:34 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 62 MB. Current time: 8/29/26, 5:21:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 61 MB. Current time: 8/29/26, 5:21:35 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,936 MB. GUI used memory: 61 MB. Current time: 8/29/26, 5:22:05 PM CEST
+// WARNING: HEventQueue.dispatchEvent() is taking  4218 ms.
+// Elapsed time: 1209 seconds
+closeMainWindow("airhockey_project - [/home/student/jwojciechowska/Desktop/projekt_cymbergaj_JW_KH-projekt_gra/fpga/build/airhockey_project.xpr] - Vivado 2021.2"); // bb
+// HOptionPane Warning: 'A background task is running. Please wait until it completes to exit Vivado. If you choose to abort background task and exit immediately, you will lose all unsaved changes to project. (Background Task)'

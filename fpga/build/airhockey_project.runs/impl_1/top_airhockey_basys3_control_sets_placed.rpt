@@ -1,0 +1,166 @@
+Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2021.2 (lin64) Build 3367213 Tue Oct 19 02:47:39 MDT 2021
+| Date         : Sun Aug 30 09:02:33 2026
+| Host         : cadence30 running 64-bit CentOS Linux release 7.9.2009 (Core)
+| Command      : report_control_sets -verbose -file top_airhockey_basys3_control_sets_placed.rpt
+| Design       : top_airhockey_basys3
+| Device       : xc7a35t
+-------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    88 |
+|    Minimum number of control sets                        |    88 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |   224 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    88 |
+| >= 0 to < 4        |     2 |
+| >= 4 to < 6        |    21 |
+| >= 6 to < 8        |    12 |
+| >= 8 to < 10       |    19 |
+| >= 10 to < 12      |     6 |
+| >= 12 to < 14      |    13 |
+| >= 14 to < 16      |     2 |
+| >= 16              |    13 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             234 |           85 |
+| No           | No                    | Yes                    |             102 |           33 |
+| No           | Yes                   | No                     |            1262 |          327 |
+| Yes          | No                    | No                     |            1355 |          312 |
+| Yes          | No                    | Yes                    |              21 |            5 |
+| Yes          | Yes                   | No                     |             482 |          169 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++--------------------------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+------------------+----------------+--------------+
+|                Clock Signal                |                              Enable Signal                             |                            Set/Reset Signal                            | Slice Load Count | Bel Load Count | Bels / Slice |
++--------------------------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+------------------+----------------+--------------+
+|  u_clk_wiz/inst/clk100MHz                  |                                                                        | btnC_IBUF                                                              |                1 |              2 |         2.00 |
+|  u_clk_wiz/inst/clk_pix                    |                                                                        | btnC_IBUF                                                              |                1 |              2 |         2.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_tx_ctl/u_uart_tx/E[0]                           | u_top_airhockey/u_rst_ctl/sync_ff[1]                                   |                1 |              4 |         4.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_score_ctl/score_p1_ones[3]_i_2_n_0                   | u_top_airhockey/u_rst_ctl/SR[0]                                        |                1 |              4 |         4.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_score_ctl/score_p1_tens[3]_i_1_n_0                   | u_top_airhockey/u_rst_ctl/SR[0]                                        |                1 |              4 |         4.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_score_ctl/score_p2_ones[3]_i_1_n_0                   | u_top_airhockey/u_rst_ctl/SR[0]                                        |                1 |              4 |         4.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_score_ctl/score_p2_tens[3]_i_1_n_0                   | u_top_airhockey/u_rst_ctl/SR[0]                                        |                2 |              4 |         2.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_game_fsm/p2_y_prev                                   | u_top_airhockey/u_game_fsm/FSM_sequential_game_state_reg[0]_7          |                3 |              4 |         1.33 |
+|  u_clk_wiz/inst/clk_pix                    |                                                                        | u_top_airhockey/u_draw_title/hcount_d2_reg[7]_1                        |                2 |              4 |         2.00 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_mouse/Inst_Ps2Interface/shift_frame                  | u_top_airhockey/u_mouse/Inst_Ps2Interface/reset_bit_count              |                1 |              4 |         4.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_tx_ctl/u_uart_tx/sync_ff_reg[1]_1               | u_top_airhockey/u_link_tx_ctl/u_uart_tx/sync_ff_reg[1]_0               |                2 |              4 |         2.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_tx_ctl/u_uart_tx/sync_ff_reg[1]_1               | u_top_airhockey/u_link_tx_ctl/u_uart_tx/sync_ff_reg[1]                 |                3 |              4 |         1.33 |
+|  u_clk_wiz/inst/clk_pix                    |                                                                        | u_top_airhockey/u_draw_diffminus_label/vcount_d2_reg[6]_0              |                2 |              5 |         2.50 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_title/vblnk_d2_reg_0                            |                2 |              5 |         2.50 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_button/hblnk_d2_reg_0                           |                1 |              5 |         5.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_mode_minus_button/hblnk_d2_reg_0                |                1 |              5 |         5.00 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_mouse/Inst_Ps2Interface/FSM_onehot_state_reg[0]_1    | u_top_airhockey/u_rst_ctl_100/sync_ff[1]                               |                1 |              5 |         5.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_diff_plus_button/hblnk_d2_reg_0                 |                1 |              5 |         5.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_win_minus_button/hblnk_d2_reg_0                 |                2 |              5 |         2.50 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_win_plus_button/hblnk_d2_reg_0                  |                2 |              5 |         2.50 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_mode_plus_button/hblnk_d2_reg_0                 |                1 |              5 |         5.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_settings_button/hblnk_d2_reg_0                  |                2 |              5 |         2.50 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_diff_minus_button/hblnk_d2_reg_0                |                1 |              5 |         5.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_puck/vblnk_d2_reg_0                             |                2 |              6 |         3.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_win_plus_button/vblnk_d2_reg_0                  |                1 |              7 |         7.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_settings_button/vblnk_d2_reg_0                  |                1 |              7 |         7.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_button/vblnk_d2_reg_0                           |                2 |              7 |         3.50 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_mouse/Inst_Ps2Interface/delay_63clk_count[6]_i_2_n_0 | u_top_airhockey/u_mouse/Inst_Ps2Interface/delay_63clk_count[6]_i_1_n_0 |                2 |              7 |         3.50 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_diff_plus_button/vblnk_d2_reg_0                 |                2 |              7 |         3.50 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_mode_minus_button/vblnk_d2_reg_0                |                2 |              7 |         3.50 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_mode_plus_button/vblnk_d2_reg_0                 |                2 |              7 |         3.50 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_win_minus_button/vblnk_d2_reg_0                 |                1 |              7 |         7.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_diff_minus_button/vblnk_d2_reg_0                |                1 |              7 |         7.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_title/in_rect_d2_reg_0                          |                2 |              7 |         3.50 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_rst_ctl_100/sync_ff_reg[1]_0                         |                                                                        |                2 |              7 |         3.50 |
+|  u_clk_wiz/inst/clk100MHz_clk_wiz_0_en_clk |                                                                        |                                                                        |                1 |              8 |         8.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_tx_ctl/u_uart_tx/shift_reg[7]_i_1_n_0           |                                                                        |                3 |              8 |         2.67 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_tx_ctl/u_uart_tx/baud_cnt_0                     | u_top_airhockey/u_rst_ctl/sync_ff[1]                                   |                4 |              8 |         2.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/payload_idx_reg[3][0]          |                                                                        |                4 |              8 |         2.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/payload_idx_reg[2]_2[0]        |                                                                        |                3 |              8 |         2.67 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/baud_cnt_0                     | u_top_airhockey/u_rst_ctl/sync_ff[1]                                   |                3 |              8 |         2.67 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/data[7]_i_1_n_0                |                                                                        |                1 |              8 |         8.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/payload_idx_reg[0]_1[0]        |                                                                        |                2 |              8 |         4.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/payload_idx_reg[0][0]          |                                                                        |                1 |              8 |         8.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/payload_idx_reg[2]_1[0]        |                                                                        |                2 |              8 |         4.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/payload_idx_reg[0]_0[0]        |                                                                        |                1 |              8 |         8.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/payload_idx_reg[1][0]          |                                                                        |                1 |              8 |         8.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/payload_idx_reg[2][0]          |                                                                        |                1 |              8 |         8.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/payload_idx_reg[2]_0[0]        |                                                                        |                1 |              8 |         8.00 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_mouse/tx_data[7]_i_1_n_0                             |                                                                        |                2 |              8 |         4.00 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_mouse/Inst_Ps2Interface/load_rx_data                 |                                                                        |                3 |              8 |         2.67 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_mouse/Inst_Ps2Interface/E[0]                         | u_top_airhockey/u_rst_ctl_100/sync_ff[1]                               |                1 |              8 |         8.00 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_mouse/Inst_Ps2Interface/FSM_onehot_state_reg[0]_0[0] | u_top_airhockey/u_rst_ctl_100/sync_ff[1]                               |                3 |              8 |         2.67 |
+|  u_clk_wiz/inst/clk_pix_clk_wiz_0_en_clk   |                                                                        |                                                                        |                1 |              8 |         8.00 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_mouse/Inst_Ps2Interface/frame[9]_i_1_n_0             |                                                                        |                2 |             10 |         5.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/link_ok_reg_0                            | u_top_airhockey/u_rst_ctl/sync_ff[1]                                   |                3 |             10 |         3.33 |
+|  u_clk_wiz/inst/clk_pix                    |                                                                        | u_top_airhockey/u_rst_ctl/SS[0]                                        |                4 |             10 |         2.50 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_mouse/y_new_reg_n_0                                  |                                                                        |                3 |             11 |         3.67 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_mouse/Inst_Ps2Interface/delay_20us_count[10]_i_2_n_0 | u_top_airhockey/u_mouse/Inst_Ps2Interface/delay_20us_count[10]_i_1_n_0 |                3 |             11 |         3.67 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_game_fsm/frame_tick_reg                              | u_top_airhockey/u_game_fsm/frame_tick_reg_0                            |                5 |             11 |         2.20 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_diffminus_label/in_rect_d2_reg_0                |                4 |             12 |         3.00 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_mouse/x_new_reg_n_0                                  |                                                                        |                5 |             12 |         2.40 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/payload_idx                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/SR[0]                          |                6 |             12 |         2.00 |
+|  u_clk_wiz/inst/clk_pix                    |                                                                        | u_top_airhockey/u_draw_modeplus_label/SS[0]                            |                5 |             12 |         2.40 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_game_fsm/p2_y_prev                                   | u_top_airhockey/u_game_fsm/sync_ff_reg[1]                              |                6 |             12 |         2.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_diffplus_label/in_rect_d2_reg_0                 |                2 |             12 |         6.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_winplus_label/in_rect_d2_reg_0                  |                3 |             12 |         4.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_winminus_label/in_rect_d2_reg_0                 |                3 |             12 |         4.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_settings_label/in_rect_d2_reg_0                 |                3 |             12 |         4.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_score2_tens/u_draw_char/in_rect_d2_reg_0        |                3 |             12 |         4.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_score1_ones/u_draw_char/in_rect_d2_reg_0        |                4 |             12 |         3.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_modeminus_label/in_rect_d2_reg_0                |                3 |             12 |         4.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          | u_top_airhockey/u_draw_score1_tens/u_draw_char/in_rect_d2_reg_0        |                2 |             12 |         6.00 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/E[0]                                                   | u_top_airhockey/u_link_rx_ctl/link_ok_reg_11                           |                7 |             14 |         2.00 |
+|  u_clk_wiz/inst/clk100MHz                  | u_top_airhockey/u_mouse/Inst_Ps2Interface/delay_100us_count[0]_i_2_n_0 | u_top_airhockey/u_mouse/Inst_Ps2Interface/clear                        |                4 |             14 |         3.50 |
+|  u_clk_wiz/inst/clk100MHz                  |                                                                        | u_top_airhockey/u_mouse/reset_timeout_cnt_reg_n_0                      |                5 |             24 |         4.80 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_frame_tick_gen/frame_tick                            | u_top_airhockey/u_rst_ctl/sync_ff[1]                                   |                7 |             24 |         3.43 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/rx_pkt_state_reg[0][0]         | u_top_airhockey/u_rst_ctl/sync_ff[1]                                   |               14 |             24 |         1.71 |
+|  u_clk_wiz/inst/clk100MHz                  |                                                                        | u_top_airhockey/u_mouse/reset_periodic_check_cnt__0                    |                6 |             26 |         4.33 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_tx_ctl/packet[0][1]_i_1_n_0                     |                                                                        |               11 |             32 |         2.91 |
+|  u_clk_wiz/inst/clk100MHz                  |                                                                        |                                                                        |               18 |             44 |         2.44 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/E[0]                                         |                                                                        |               11 |             44 |         4.00 |
+|  u_clk_wiz/inst/clk100MHz                  |                                                                        | u_top_airhockey/u_rst_ctl_100/sync_ff[1]                               |               18 |             59 |         3.28 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_game_fsm/p2_y_prev                                   |                                                                        |               25 |             65 |         2.60 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_link_rx_ctl/u_uart_rx/E[0]                           | u_top_airhockey/u_rst_ctl/sync_ff[1]                                   |               34 |             69 |         2.03 |
+|  u_clk_wiz/inst/clk_pix                    |                                                                        |                                                                        |               65 |            178 |         2.74 |
+|  u_clk_wiz/inst/clk_pix                    | u_top_airhockey/u_rst_ctl/sync_ff_reg[1]_0[0]                          |                                                                        |              228 |           1070 |         4.69 |
+|  u_clk_wiz/inst/clk_pix                    |                                                                        | u_top_airhockey/u_rst_ctl/sync_ff[1]                                   |              316 |           1220 |         3.86 |
++--------------------------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+------------------+----------------+--------------+
+
+
