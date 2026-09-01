@@ -1,0 +1,24 @@
+# Vivado pliki tymczasowe i logi
+.Xil/
+*.jou
+*.log
+*.pb
+*.str
+*.wdb
+*.vcd
+usage_statistics_webtalk.*
+.gen/
+
+# Katalogi budowania Vivado
+fpga/build/
+build/
+*.runs/
+*.cache/
+*.hw/
+*.ip_user_files/
+
+# IDE (DVT / VS Code)
+.dvt/
+.vscode/
+*.swp
+*~
