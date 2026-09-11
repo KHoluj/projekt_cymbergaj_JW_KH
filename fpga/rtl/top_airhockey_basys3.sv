@@ -32,7 +32,7 @@ module top_airhockey_basys3 (
      * Local variables and signals
      */
 
-    wire clk_pix, clk100MHz, locked;   
+    wire clk_pix, locked;
     wire pclk_mirror;
 
     /**
@@ -45,15 +45,12 @@ module top_airhockey_basys3 (
      * FPGA submodules
      */
 
-    
     clk_wiz_0 u_clk_wiz (
         .clk(clk),
         .clk_pix(clk_pix),
-        .clk100MHz(clk100MHz),
+        .clk100MHz(),
         .locked(locked)
     );
-
-    
 
     ODDR pclk_oddr (
         .Q(pclk_mirror),
@@ -71,7 +68,6 @@ module top_airhockey_basys3 (
 
     top_airhockey u_top_airhockey (
         .clk(clk_pix),
-        .clk100MHz(clk100MHz),
         .btn_rst(btnC),
         .btn_exit(btnL),
         .sw_is_host(sw0),

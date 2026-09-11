@@ -298,8 +298,3 @@ set_property PACKAGE_PIN B17 [get_ports PS2Data]
 set_property CONFIG_VOLTAGE 3.3 [current_design]
 set_property CFGBVS VCCO [current_design]
 
-
-set_false_path -to [get_cells -hier -filter {NAME =~ "*mouse_x_sync1_reg*"}]
-set_false_path -to [get_cells -hier -filter {NAME =~ "*mouse_y_sync1_reg*"}]
-set_false_path -to [get_cells -hier -filter {NAME =~ "*mouse_left_sync1_reg*"}]
-
